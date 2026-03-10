@@ -336,7 +336,7 @@ import { Mail, MapPin, Phone } from "lucide-react";
 
   const getActiveLayout = () => (window.matchMedia("(min-width: 1024px)").matches ? "desktop" : "mobile");
 
-  const isValidPhoneNumber = (value) => {
+  const isValidPhoneNumber = (value: string) => {
     const trimmed = value.trim();
     if (!trimmed) return true;
     if (!/^\+?[0-9\s().-]+$/.test(trimmed)) return false;
@@ -344,7 +344,7 @@ import { Mail, MapPin, Phone } from "lucide-react";
     return digits.length >= 9 && digits.length <= 15;
   };
 
-  const encodeFormData = (formData) => {
+  const encodeFormData = (formData: FormData) => {
     const params = new URLSearchParams();
 
     for (const [key, value] of formData.entries()) {
@@ -356,7 +356,7 @@ import { Mail, MapPin, Phone } from "lucide-react";
     return params.toString();
   };
 
-  const setStatusAppearance = (type) => {
+  const setStatusAppearance = (type: "success" | "error") => {
     if (!(status instanceof HTMLElement)) return;
 
     status.classList.remove("border-primary/20", "bg-primary/10", "text-primary");
@@ -370,7 +370,9 @@ import { Mail, MapPin, Phone } from "lucide-react";
     status.classList.add("border-primary/20", "bg-primary/10", "text-primary");
   };
 
-  const syncDetailValue = (sourceField) => {
+  const syncDetailValue = (
+    sourceField: HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement,
+  ) => {
     if (!(sourceField instanceof HTMLInputElement) && !(sourceField instanceof HTMLTextAreaElement) && !(sourceField instanceof HTMLSelectElement)) {
       return;
     }
