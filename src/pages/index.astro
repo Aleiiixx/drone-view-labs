@@ -176,5 +176,11 @@ const structuredData = [
       if (!key || !messages[key]) return;
       element.dataset.invalidMessage = formatValue(messages[key], element);
     });
+
+    document.querySelectorAll("[data-i18n-error]").forEach((element) => {
+      const key = element.getAttribute("data-i18n-error");
+      if (!key || !messages[key]) return;
+      element.textContent = formatValue(messages[key], element);
+    });
   </script>
 </BaseLayout>
