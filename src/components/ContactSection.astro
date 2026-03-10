@@ -10,38 +10,14 @@ import { Mail, MapPin, Phone } from "lucide-react";
     </div>
 
     <form
+      class="space-y-6"
       name="contact"
       method="POST"
+      action="/"
       data-netlify="true"
       netlify-honeypot="bot-field"
-      hidden
-      aria-hidden="true"
+      data-contact-form
     >
-      <input type="hidden" name="form-name" value="contact" />
-      <input type="text" name="bot-field" />
-      <input type="text" name="name" />
-      <input type="email" name="email" />
-      <input type="tel" name="phone" />
-      <input type="text" name="workType" />
-      <textarea name="message"></textarea>
-      <input type="text" name="surveyLocation" />
-      <input type="text" name="surveyArea" />
-      <input type="date" name="surveyDate" />
-      <input type="text" name="surveyDelivery" />
-      <input type="text" name="modelLocation" />
-      <input type="text" name="modelArea" />
-      <input type="date" name="modelDate" />
-      <input type="text" name="modelGoal" />
-      <input type="text" name="modelDetail" />
-      <input type="text" name="agriLocation" />
-      <input type="text" name="agriProduct" />
-      <input type="date" name="agriDate" />
-      <input type="text" name="agriQuantity" />
-      <input type="text" name="agriHectares" />
-      <input type="text" name="agriCrop" />
-    </form>
-
-    <form class="space-y-6" name="contact" method="POST" action="/" data-contact-form>
       <input type="hidden" name="form-name" value="contact" />
       <p class="hidden">
         <label>
