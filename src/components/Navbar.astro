@@ -1,0 +1,93 @@
+---
+import { Menu, X } from "lucide-react";
+
+const navLinks = [
+  { label: "Serveis", href: "#services", key: "nav.services" },
+  { label: "Tecnologia", href: "#technology", key: "nav.technology" },
+  { label: "Avantatges", href: "#benefits", key: "nav.benefits" },
+  { label: "Proces", href: "#process", key: "nav.process" },
+  { label: "Projectes", href: "#projects", key: "nav.projects" },
+  { label: "Qui som", href: "#about", key: "nav.about" },
+  { label: "Contacte", href: "#contact", key: "nav.contact" },
+];
+---
+
+<nav class="fixed left-0 right-0 top-0 z-50 border-b border-border bg-card/90 backdrop-blur-md" data-nav-root>
+  <div class="container-narrow flex h-16 items-center justify-between px-4 md:px-8">
+    <a href="#top" class="text-xl font-bold tracking-tight text-primary">SERVIDRONE</a>
+
+    <div class="hidden items-center gap-6 md:flex">
+      {
+        navLinks.map((link) => (
+          <a
+            href={link.href}
+            class="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+            data-i18n={link.key}
+          >
+            {link.label}
+          </a>
+        ))
+      }
+      <a href="#contact" class="btn btn-primary px-4 py-2 text-sm" data-i18n="nav.quote">
+        Demana pressupost
+      </a>
+    </div>
+
+    <button
+      type="button"
+      class="inline-flex text-foreground md:hidden"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      aria-label="Obrir navegacio"
+      data-nav-toggle
+      data-i18n-aria-label="nav.toggle"
+    >
+      <span class="sr-only">Toggle navigation</span>
+      <Menu className="h-6 w-6" data-nav-icon="open" />
+      <X className="hidden h-6 w-6" data-nav-icon="close" />
+    </button>
+  </div>
+
+  <div id="mobile-menu" class="hidden border-b border-border bg-card px-4 pb-4 md:hidden" data-nav-menu>
+    {
+        navLinks.map((link) => (
+        <a
+          href={link.href}
+          class="block py-2 text-sm font-medium text-muted-foreground hover:text-primary"
+          data-nav-link
+          data-i18n={link.key}
+        >
+          {link.label}
+        </a>
+      ))
+    }
+    <a href="#contact" class="btn btn-primary mt-2 w-full" data-nav-link data-i18n="nav.quote">
+      Demana pressupost
+    </a>
+  </div>
+</nav>
+
+<script>
+  const nav = document.querySelector("[data-nav-root]");
+  if (nav) {
+    const toggle = nav.querySelector("[data-nav-toggle]");
+    const menu = nav.querySelector("[data-nav-menu]");
+    const openIcon = nav.querySelector('[data-nav-icon="open"]');
+    const closeIcon = nav.querySelector('[data-nav-icon="close"]');
+    const links = nav.querySelectorAll("[data-nav-link]");
+
+    const setOpen = (isOpen) => {
+      toggle?.setAttribute("aria-expanded", String(isOpen));
+      menu?.classList.toggle("hidden", !isOpen);
+      openIcon?.classList.toggle("hidden", isOpen);
+      closeIcon?.classList.toggle("hidden", !isOpen);
+    };
+
+    toggle?.addEventListener("click", () => {
+      const isOpen = toggle.getAttribute("aria-expanded") === "true";
+      setOpen(!isOpen);
+    });
+
+    links.forEach((link) => link.addEventListener("click", () => setOpen(false)));
+  }
+</script>

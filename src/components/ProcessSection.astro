@@ -1,0 +1,56 @@
+---
+import { ClipboardList, Cpu, FileBarChart, Plane } from "lucide-react";
+
+const steps = [
+  {
+    icon: ClipboardList,
+    step: "01",
+    title: "Planificacio de missio",
+    desc: "Definim objectius, estudiem la zona i preparem el pla de vol mes adient.",
+  },
+  {
+    icon: Plane,
+    step: "02",
+    title: "Vol i captura",
+    desc: "Executem el vol del dron i capturem les dades aeries amb la configuracio necessaria.",
+  },
+  {
+    icon: Cpu,
+    step: "03",
+    title: "Processament de dades",
+    desc: "Processem i analitzem les imatges amb eines professionals de fotogrametria i GIS.",
+  },
+  {
+    icon: FileBarChart,
+    step: "04",
+    title: "Lliurament final",
+    desc: "Entreguem mapes, models, informes i resultats preparats per a la presa de decisions.",
+  },
+];
+---
+
+<section id="process" class="section-padding bg-card">
+  <div class="container-narrow">
+    <div class="mb-16 text-center">
+      <span class="text-sm font-semibold uppercase tracking-widest text-muted-foreground" data-i18n="process.eyebrow">Com treballem</span>
+      <h2 class="mt-2 text-3xl font-bold text-foreground md:text-4xl" data-i18n="process.title">El nostre proces</h2>
+    </div>
+
+    <div class="relative grid gap-8 md:grid-cols-4">
+      <div class="absolute left-[12.5%] right-[12.5%] top-10 hidden h-0.5 bg-border md:block"></div>
+
+      {
+        steps.map((step, index) => (
+          <article class="relative text-center">
+            <div class="relative z-10 mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full border-4 border-background bg-primary/10">
+              <step.icon className="h-8 w-8 text-primary" />
+            </div>
+            <span class="text-xs font-bold uppercase tracking-widest text-accent" data-i18n={`process.items.${index}.step`}>Pas {step.step}</span>
+            <h3 class="mb-2 mt-2 font-bold text-foreground" data-i18n={`process.items.${index}.title`}>{step.title}</h3>
+            <p class="text-sm text-muted-foreground" data-i18n={`process.items.${index}.description`}>{step.desc}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

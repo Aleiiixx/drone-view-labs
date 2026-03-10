@@ -1,0 +1,34 @@
+---
+import { Crosshair, DollarSign, MapPin, Mountain, Zap } from "lucide-react";
+
+const benefits = [
+  { icon: Crosshair, title: "Mes precisio", desc: "Precisio centimetrica superior a molts metodes tradicionals de camp." },
+  { icon: Zap, title: "Captura mes rapida", desc: "Cobertura de grans superfícies en menys temps i amb menys desplaçaments." },
+  { icon: DollarSign, title: "Menys costos", desc: "Reduccio de costos operatius respecte a equips terrestres o mitjans tripulats." },
+  { icon: Mountain, title: "Acces a zones dificils", desc: "Arribem a terrenys irregulars o punts de dificil acces amb seguretat." },
+  { icon: MapPin, title: "Mapes d'alta resolucio", desc: "Lliurem cartografia tecnica, models 3D i resultats visuals de gran detall." },
+];
+---
+
+<section id="benefits" class="section-padding topo-lines bg-background">
+  <div class="container-narrow">
+    <div class="mb-16 text-center">
+      <span class="text-sm font-semibold uppercase tracking-widest text-muted-foreground" data-i18n="benefits.eyebrow">Per que drons</span>
+      <h2 class="mt-2 text-3xl font-bold text-foreground md:text-4xl" data-i18n="benefits.title">Els avantatges de les dades aeries</h2>
+    </div>
+
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
+      {
+        benefits.map((benefit, index) => (
+          <article class="card-hover rounded-lg border border-border bg-card p-6 text-center shadow-sm">
+            <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-accent/20">
+              <benefit.icon className="h-6 w-6 text-primary" />
+            </div>
+            <h3 class="mb-2 text-sm font-bold text-foreground" data-i18n={`benefits.items.${index}.title`}>{benefit.title}</h3>
+            <p class="text-xs text-muted-foreground" data-i18n={`benefits.items.${index}.description`}>{benefit.desc}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

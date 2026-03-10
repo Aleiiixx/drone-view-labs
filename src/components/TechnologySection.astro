@@ -1,0 +1,70 @@
+---
+import droneImage from "@/assets/matrice-400-l3.webp";
+import { BarChart3, Camera, Cpu, Navigation } from "lucide-react";
+
+const techItems = [
+  {
+    icon: Cpu,
+    title: "Drons d'alta precisio",
+    desc: "Plataformes UAV professionals amb control de vol avancat i sistemes de seguretat redundants.",
+  },
+  {
+    icon: Navigation,
+    title: "Posicionament GPS i RTK",
+    desc: "Precisio centimetrica mitjancant sistemes de posicionament cinematic en temps real.",
+  },
+  {
+    icon: Camera,
+    title: "Captacio d'imatge avancada",
+    desc: "Sensors RGB, termics i multiespectrals per obtenir informacio completa del terreny i del cultiu.",
+  },
+  {
+    icon: BarChart3,
+    title: "Processament professional",
+    desc: "Fluxos de fotogrametria i GIS per generar cartografia i resultats fiables.",
+  },
+];
+---
+
+<section id="technology" class="section-padding bg-card">
+  <div class="container-narrow">
+    <div class="grid items-center gap-12 lg:grid-cols-2">
+      <div class="relative overflow-hidden rounded-lg shadow-2xl">
+        <img
+          src={droneImage.src}
+          alt="Dron professional fent una presa de dades sobre terreny agricola"
+          data-i18n-alt="technology.imageAlt"
+          class="h-80 w-full object-cover object-[78%_center] lg:h-[480px]"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-foreground/30 to-transparent"></div>
+      </div>
+
+      <div>
+        <span class="text-sm font-semibold uppercase tracking-widest text-muted-foreground" data-i18n="technology.eyebrow">La nostra tecnologia</span>
+        <h2 class="mb-6 mt-2 text-3xl font-bold text-foreground md:text-4xl" data-i18n-html="technology.title">
+          Eines avancades per a <span class="text-gradient">dades precises</span>
+        </h2>
+        <p class="mb-8 text-muted-foreground" data-i18n="technology.description">
+          Combinem plataformes UAV professionals i processament geoespacial per oferir resultats precisos,
+          fiables i orientats a la presa de decisions.
+        </p>
+
+        <div class="grid gap-6 sm:grid-cols-2">
+          {
+            techItems.map((item, index) => (
+              <div class="flex gap-4">
+                <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-md bg-primary/10">
+                  <item.icon className="h-5 w-5 text-primary" />
+                </div>
+                <div>
+                  <h3 class="text-sm font-semibold text-foreground" data-i18n={`technology.items.${index}.title`}>{item.title}</h3>
+                  <p class="mt-1 text-xs text-muted-foreground" data-i18n={`technology.items.${index}.description`}>{item.desc}</p>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

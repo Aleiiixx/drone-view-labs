@@ -1,0 +1,72 @@
+---
+import heroImage from "@/assets/hero-aerial.jpg";
+import { getSiteUrl, siteConfig } from "@/data/site";
+import "@/styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+  locale?: "ca" | "es" | "en";
+  robots?: string;
+  structuredData?: Array<Record<string, unknown>> | Record<string, unknown> | null;
+}
+
+const {
+  title = "Servidrone Tarragona | Topografia i aplicacions amb dron",
+  description = "Empresa de Tarragona especialitzada en topografia amb dron, models 3D del terreny, cartografia tecnica i aplicacions agricoles.",
+  locale = "ca",
+  robots = "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1",
+  structuredData = null,
+} = Astro.props;
+
+const siteUrl = getSiteUrl();
+const canonicalUrl = siteUrl ? new URL(Astro.url.pathname, `${siteUrl}/`).toString() : "";
+const socialImage = siteUrl ? new URL(heroImage.src, `${siteUrl}/`).toString() : "";
+const localeCode = siteConfig.localeMap[locale] || siteConfig.localeMap[siteConfig.defaultLocale];
+const structuredDataItems = Array.isArray(structuredData)
+  ? structuredData
+  : structuredData
+    ? [structuredData]
+    : [];
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} id="site-description" />
+    <meta name="robots" content={robots} />
+    <meta name="author" content={siteConfig.legalName} />
+    <meta name="theme-color" content={siteConfig.themeColor} />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={siteConfig.name} />
+    <meta property="og:locale" content={localeCode} />
+    <meta property="og:title" content={title} id="meta-og-title" />
+    <meta property="og:description" content={description} id="meta-og-description" />
+    {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
+    {socialImage && <meta property="og:image" content={socialImage} />}
+    {socialImage && <meta property="og:image:alt" content={siteConfig.socialImageAlt} />}
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} id="meta-twitter-title" />
+    <meta name="twitter:description" content={description} id="meta-twitter-description" />
+    {socialImage && <meta name="twitter:image" content={socialImage} />}
+    {socialImage && <meta name="twitter:image:alt" content={siteConfig.socialImageAlt} />}
+
+    <title>{title}</title>
+
+    {structuredDataItems.map((item) => (
+      <script type="application/ld+json" set:html={JSON.stringify(item)} />
+    ))}
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

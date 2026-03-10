@@ -1,0 +1,116 @@
+---
+import heroImage from "@/assets/hero-aerial.jpg";
+---
+
+<section id="top" class="relative flex min-h-screen items-center justify-center overflow-hidden">
+  <div class="absolute inset-0">
+    <img
+      src={heroImage.src}
+      alt="Vista aeria d'un camp capturada amb dron"
+      data-i18n-alt="hero.imageAlt"
+      class="h-full w-full object-cover"
+    />
+    <div class="absolute inset-0 bg-foreground/60"></div>
+  </div>
+
+  <svg class="pointer-events-none absolute inset-0 h-full w-full opacity-10" xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M0,300 Q200,250 400,300 T800,300 T1200,280 T1600,300 T2000,290"
+      fill="none"
+      stroke="hsl(101,62%,60%)"
+      stroke-width="1"
+      stroke-dasharray="10,5"
+      class="animate-drone-path"
+    ></path>
+    <path
+      d="M0,500 Q300,450 600,500 T1200,480 T1800,510"
+      fill="none"
+      stroke="hsl(101,62%,60%)"
+      stroke-width="0.8"
+      stroke-dasharray="8,6"
+      class="animate-drone-path"
+      style="animation-delay: 1s;"
+    ></path>
+    <path
+      d="M0,200 Q250,170 500,200 T1000,190 T1500,210 T2000,195"
+      fill="none"
+      stroke="hsl(122,45%,34%)"
+      stroke-width="0.6"
+      stroke-dasharray="12,4"
+      class="animate-drone-path"
+      style="animation-delay: 2s;"
+    ></path>
+  </svg>
+
+  <div class="container-narrow relative z-10 px-4 pt-20 text-center md:px-8">
+    <h1
+      class="animate-fade-up text-4xl font-extrabold leading-tight text-primary-foreground md:text-6xl lg:text-7xl"
+      data-i18n-html="hero.title"
+    >
+      Intel·ligencia aeria per a l'agricultura<br class="hidden md:block" />
+      i la topografia del terreny
+    </h1>
+    <p
+      class="mx-auto mt-6 max-w-2xl animate-fade-up text-lg text-primary-foreground/80 md:text-xl"
+      style="animation-delay: 0.2s;"
+      data-i18n="hero.description"
+    >
+      Serveis professionals amb dron des de Tarragona per a topografia, models 3D del terreny,
+      aplicacions agricoles i analisi geoespacial. Dades utiles per prendre millors decisions.
+    </p>
+    <div
+      class="mt-10 flex animate-fade-up flex-col items-center justify-center gap-4 sm:flex-row"
+      style="animation-delay: 0.4s;"
+    >
+      <a href="#contact" class="btn btn-lg btn-primary" data-i18n="hero.quote">
+        Demana pressupost
+      </a>
+      <a
+        href="#contact"
+        class="btn btn-lg border border-primary-foreground/30 bg-transparent text-primary-foreground hover:bg-primary-foreground/10"
+        data-i18n="hero.contact"
+      >
+        Contacta'ns
+      </a>
+    </div>
+  </div>
+
+  <div class="absolute inset-x-0 bottom-6 z-10 flex justify-center transition-opacity duration-500" data-scroll-indicator>
+    <a
+      href="#services"
+      class="inline-flex items-center justify-center text-primary-foreground transition-opacity duration-300"
+      aria-label="Baixa fins als serveis"
+      data-i18n-aria-label="hero.scrollAria"
+    >
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 24 24"
+        class="scroll-arrow h-8 w-8 drop-shadow-[0_2px_12px_rgba(0,0,0,0.34)]"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M6 9l6 6 6-6"></path>
+      </svg>
+    </a>
+  </div>
+
+  <script>
+    const indicator = document.querySelector("[data-scroll-indicator]");
+
+    const updateIndicator = () => {
+      if (!(indicator instanceof HTMLElement)) {
+        return;
+      }
+
+      const hidden = window.scrollY > 24;
+      indicator.classList.toggle("opacity-0", hidden);
+      indicator.classList.toggle("pointer-events-none", hidden);
+    };
+
+    updateIndicator();
+    window.addEventListener("scroll", updateIndicator, { passive: true });
+  </script>
+</section>

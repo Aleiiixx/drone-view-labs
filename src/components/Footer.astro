@@ -1,0 +1,30 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-foreground px-4 py-12 md:px-8">
+  <div class="container-narrow">
+    <div class="flex flex-col items-center justify-between gap-6 md:flex-row">
+      <div>
+        <span class="text-xl font-bold tracking-tight text-primary-foreground">SERVIDRONE</span>
+        <p class="mt-1 text-sm text-primary-foreground/50" data-i18n="footer.tagline">
+          Intel·ligencia aerea des de Tarragona per a topografia i aplicacions amb dron.
+        </p>
+      </div>
+      <div class="flex gap-6 text-sm text-primary-foreground/50">
+        <a href="#services" class="transition-colors hover:text-primary-foreground" data-i18n="footer.links.services">Serveis</a>
+        <a href="#technology" class="transition-colors hover:text-primary-foreground" data-i18n="footer.links.technology">Tecnologia</a>
+        <a href="#projects" class="transition-colors hover:text-primary-foreground" data-i18n="footer.links.projects">Projectes</a>
+        <a href="#contact" class="transition-colors hover:text-primary-foreground" data-i18n="footer.links.contact">Contacte</a>
+      </div>
+    </div>
+    <div class="mt-8 border-t border-primary-foreground/10 pt-8 text-center">
+      <p class="text-xs text-primary-foreground/40" data-i18n="footer.copyright" data-year={year}>
+        © {year} Servidrone. Tots els drets reservats.
+      </p>
+      <p class="mt-2 text-xs text-primary-foreground/50" data-i18n="footer.legalEntity">
+        Empresa responsable: Gibosa M2R SL.
+      </p>
+    </div>
+  </div>
+</footer>

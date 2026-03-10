@@ -1,0 +1,76 @@
+---
+import { Map, Search, Sprout } from "lucide-react";
+
+const services = [
+  {
+    icon: Sprout,
+    title: "Aplicacions agricoles amb dron",
+    description:
+      "Aplicacions agricoles i tractaments amb dron per cobrir superfícies de manera eficient, segura i amb menys impacte sobre el terreny.",
+    features: [
+      "Aplicacions fitosanitaries amb dron",
+      "Cobertura rapida de parcel·les",
+      "Menys compactacio del terreny",
+      "Acces a zones dificils",
+    ],
+  },
+  {
+    icon: Map,
+    title: "Topografia i models del terreny",
+    description:
+      "Captura i processament de dades per generar models digitals, analisi topografica i amidaments fiables per a projectes tecnics.",
+    features: [
+      "Models digitals del terreny",
+      "Models 3D del terreny",
+      "Calculs volumetrics",
+      "Generacio de corbes de nivell",
+    ],
+  },
+  {
+    icon: Search,
+    title: "Inspeccions aeries",
+    description:
+      "Inspeccions detallades d'infraestructures, finques, cobertes, instal·lacions solars i espais rurals des d'una perspectiva segura.",
+    features: [
+      "Avaluacio d'infraestructures",
+      "Documentacio de finques i obres",
+      "Inspeccio de plaques solars",
+      "Seguiment d'instal·lacions",
+    ],
+  },
+];
+---
+
+<section id="services" class="section-padding topo-lines bg-background">
+  <div class="container-narrow">
+    <div class="mb-16 text-center">
+      <span class="text-sm font-semibold uppercase tracking-widest text-accent-foreground/60" data-i18n="services.eyebrow">Que fem</span>
+      <h2 class="mt-2 text-3xl font-bold text-foreground md:text-4xl" data-i18n="services.title">Els nostres serveis</h2>
+      <p class="mx-auto mt-4 max-w-2xl text-muted-foreground" data-i18n="services.description">
+        Solucions aeries amb dron per a aplicacions agricoles, topografia, models 3D i gestio tecnica del territori.
+      </p>
+    </div>
+
+    <div class="grid gap-8 md:grid-cols-3">
+      {
+        services.map((service, index) => (
+          <article class="card-hover rounded-lg border border-border bg-card p-8 shadow-md">
+            <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-lg bg-primary/10">
+              <service.icon className="h-7 w-7 text-primary" />
+            </div>
+            <h3 class="mb-3 text-xl font-bold text-foreground" data-i18n={`services.items.${index}.title`}>{service.title}</h3>
+            <p class="mb-5 text-sm text-muted-foreground" data-i18n={`services.items.${index}.description`}>{service.description}</p>
+            <ul class="space-y-2">
+              {service.features.map((feature, featureIndex) => (
+                <li class="flex items-center gap-2 text-sm text-foreground" data-i18n={`services.items.${index}.features.${featureIndex}`}>
+                  <span class="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-accent"></span>
+                  {feature}
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

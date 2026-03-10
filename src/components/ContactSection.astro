@@ -1,0 +1,477 @@
+---
+import { Mail, MapPin, Phone } from "lucide-react";
+---
+
+<section id="contact" class="section-padding topo-lines bg-background">
+  <div class="container-narrow">
+    <div class="mb-16 text-center">
+      <span class="text-sm font-semibold uppercase tracking-widest text-muted-foreground" data-i18n="contact.eyebrow">Parlem?</span>
+      <h2 class="mt-2 text-3xl font-bold text-foreground md:text-4xl" data-i18n="contact.title">Contacta amb nosaltres</h2>
+    </div>
+
+    <form class="space-y-6" data-contact-form>
+      <div class="hidden">
+        <span data-form-alert-worktype data-i18n="contact.form.alerts.workType">Selecciona un tipus de treball abans d'enviar el formulari.</span>
+        <span data-form-alert-details data-i18n="contact.form.alerts.details">Omple la informacio inicial del treball seleccionat abans d'enviar el formulari.</span>
+      </div>
+
+      <div class="grid items-start gap-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(320px,0.85fr)]">
+        <div class="flex rounded-lg border border-border bg-card p-8 shadow-md">
+          <div class="flex min-h-full w-full flex-col">
+            <div>
+              <label for="name" class="field-label" data-i18n="contact.form.nameLabel">Nom *</label>
+              <input id="name" name="name" class="input-field" placeholder="El teu nom complet" maxlength="100" required data-i18n-placeholder="contact.form.namePlaceholder" />
+            </div>
+
+            <div class="mt-5 grid gap-5 sm:grid-cols-2">
+              <div>
+                <label for="email" class="field-label" data-i18n="contact.form.emailLabel">Correu electronic *</label>
+                <input id="email" name="email" type="email" class="input-field" placeholder="XXXXXXX" maxlength="255" required data-i18n-placeholder="contact.form.emailPlaceholder" />
+              </div>
+
+              <div>
+                <label for="phone" class="field-label" data-i18n="contact.form.phoneLabel">Telefon</label>
+                <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" class="input-field" placeholder="XXXXXXX" maxlength="20" data-i18n-placeholder="contact.form.phonePlaceholder" data-i18n-invalid="contact.form.phoneInvalid" />
+              </div>
+            </div>
+
+            <fieldset class="mt-5 space-y-3">
+              <legend class="field-label mb-0" data-i18n="contact.form.workTypeLabel">Tipus de treball *</legend>
+              <p class="text-sm text-muted-foreground" data-i18n="contact.form.workTypeHelp">Escull el servei que s'ajusta millor a la teva necessitat i t'ensenyarem les dades inicials que ens van be.</p>
+
+              <div class="grid gap-3 sm:grid-cols-3">
+                <label class="group cursor-pointer">
+                  <input type="radio" name="workType" value="survey" class="peer sr-only" required data-work-type-input />
+                  <span class="flex h-full rounded-lg border border-border bg-background px-4 py-3 text-sm font-semibold text-foreground transition-all duration-200 peer-checked:border-primary peer-checked:bg-primary/10 peer-checked:text-primary group-hover:border-primary/40">
+                    <span data-i18n="contact.form.workTypes.survey">Levantament topografic</span>
+                  </span>
+                </label>
+
+                <label class="group cursor-pointer">
+                  <input type="radio" name="workType" value="model3d" class="peer sr-only" required data-work-type-input />
+                  <span class="flex h-full rounded-lg border border-border bg-background px-4 py-3 text-sm font-semibold text-foreground transition-all duration-200 peer-checked:border-primary peer-checked:bg-primary/10 peer-checked:text-primary group-hover:border-primary/40">
+                    <span data-i18n="contact.form.workTypes.model3d">Model 3D</span>
+                  </span>
+                </label>
+
+                <label class="group cursor-pointer">
+                  <input type="radio" name="workType" value="agriculture" class="peer sr-only" required data-work-type-input />
+                  <span class="flex h-full rounded-lg border border-border bg-background px-4 py-3 text-sm font-semibold text-foreground transition-all duration-200 peer-checked:border-primary peer-checked:bg-primary/10 peer-checked:text-primary group-hover:border-primary/40">
+                    <span data-i18n="contact.form.workTypes.agriculture">Aplicacio agricola</span>
+                  </span>
+                </label>
+              </div>
+            </fieldset>
+
+            <div class="mt-0 max-h-0 overflow-hidden opacity-0 transition-all duration-300 ease-out lg:hidden" data-work-panel-shell data-layout="mobile" aria-hidden="true">
+              <div class="pt-5">
+                <div class="rounded-lg border border-border bg-background p-6">
+                  <div class="hidden space-y-5" data-work-panel="survey" data-layout="mobile">
+                    <div class="space-y-2">
+                      <p class="text-sm font-semibold uppercase tracking-[0.22em] text-muted-foreground" data-i18n="contact.details.eyebrow">Dades inicials</p>
+                      <h3 class="text-2xl font-bold text-foreground" data-i18n="contact.details.survey.title">Informacio per al levantament topografic</h3>
+                      <p class="text-sm leading-6 text-muted-foreground" data-i18n="contact.details.survey.description">Amb aquestes dades podem fer-nos una idea rapida de l'entorn, l'escala del treball i el lliurament esperat.</p>
+                    </div>
+                    <div>
+                      <label for="survey-location-mobile" class="field-label" data-i18n="contact.details.survey.fields.location.label">Ubicacio o finca</label>
+                      <input id="survey-location-mobile" name="surveyLocation" class="input-field" maxlength="120" placeholder="Municipi, finca o referencia" data-i18n-placeholder="contact.details.survey.fields.location.placeholder" data-work-detail="survey" data-layout="mobile" />
+                    </div>
+                    <div class="grid gap-4 sm:grid-cols-2">
+                      <div>
+                        <label for="survey-area-mobile" class="field-label" data-i18n="contact.details.survey.fields.area.label">Superficie aproximada</label>
+                        <input id="survey-area-mobile" name="surveyArea" class="input-field" maxlength="60" placeholder="Ex. 12 ha" data-i18n-placeholder="contact.details.survey.fields.area.placeholder" data-work-detail="survey" data-layout="mobile" />
+                      </div>
+                      <div>
+                        <label for="survey-date-mobile" class="field-label" data-i18n="contact.details.survey.fields.date.label">Data orientativa</label>
+                        <input id="survey-date-mobile" name="surveyDate" type="date" class="input-field" data-work-detail="survey" data-layout="mobile" />
+                      </div>
+                    </div>
+                    <div>
+                      <label for="survey-delivery-mobile" class="field-label" data-i18n="contact.details.survey.fields.delivery.label">Que necessites rebre</label>
+                      <input id="survey-delivery-mobile" name="surveyDelivery" class="input-field" maxlength="80" placeholder="Ex. corbes de nivell o model digital" data-i18n-placeholder="contact.details.survey.fields.delivery.placeholder" data-work-detail="survey" data-layout="mobile" />
+                    </div>
+                  </div>
+
+                  <div class="hidden space-y-5" data-work-panel="model3d" data-layout="mobile">
+                    <div class="space-y-2">
+                      <p class="text-sm font-semibold uppercase tracking-[0.22em] text-muted-foreground" data-i18n="contact.details.eyebrow">Dades inicials</p>
+                      <h3 class="text-2xl font-bold text-foreground" data-i18n="contact.details.model3d.title">Informacio per al model 3D</h3>
+                      <p class="text-sm leading-6 text-muted-foreground" data-i18n="contact.details.model3d.description">Ens ajuda saber quin espai s'ha de modelar, per a que servira i quin nivell de detall t'interessa.</p>
+                    </div>
+                    <div>
+                      <label for="model-location-mobile" class="field-label" data-i18n="contact.details.model3d.fields.location.label">Ubicacio del projecte</label>
+                      <input id="model-location-mobile" name="modelLocation" class="input-field" maxlength="120" placeholder="Municipi, finca o actiu" data-i18n-placeholder="contact.details.model3d.fields.location.placeholder" data-work-detail="model3d" data-layout="mobile" />
+                    </div>
+                    <div class="grid gap-4 sm:grid-cols-2">
+                      <div>
+                        <label for="model-area-mobile" class="field-label" data-i18n="contact.details.model3d.fields.area.label">Superficie o dimensions</label>
+                        <input id="model-area-mobile" name="modelArea" class="input-field" maxlength="60" placeholder="Ex. 4 ha o 300 x 200 m" data-i18n-placeholder="contact.details.model3d.fields.area.placeholder" data-work-detail="model3d" data-layout="mobile" />
+                      </div>
+                      <div>
+                        <label for="model-date-mobile" class="field-label" data-i18n="contact.details.model3d.fields.date.label">Data orientativa</label>
+                        <input id="model-date-mobile" name="modelDate" type="date" class="input-field" data-work-detail="model3d" data-layout="mobile" />
+                      </div>
+                    </div>
+                    <div class="grid gap-4 sm:grid-cols-2">
+                      <div>
+                        <label for="model-goal-mobile" class="field-label" data-i18n="contact.details.model3d.fields.goal.label">Objectiu del model</label>
+                        <input id="model-goal-mobile" name="modelGoal" class="input-field" maxlength="80" placeholder="Ex. analisi tecnica o presentacio" data-i18n-placeholder="contact.details.model3d.fields.goal.placeholder" data-work-detail="model3d" data-layout="mobile" />
+                      </div>
+                      <div>
+                        <label for="model-detail-mobile" class="field-label" data-i18n="contact.details.model3d.fields.detail.label">Nivell de detall esperat</label>
+                        <input id="model-detail-mobile" name="modelDetail" class="input-field" maxlength="80" placeholder="Ex. visual general o detall alt" data-i18n-placeholder="contact.details.model3d.fields.detail.placeholder" data-work-detail="model3d" data-layout="mobile" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="hidden space-y-5" data-work-panel="agriculture" data-layout="mobile">
+                    <div class="space-y-2">
+                      <p class="text-sm font-semibold uppercase tracking-[0.22em] text-muted-foreground" data-i18n="contact.details.eyebrow">Dades inicials</p>
+                      <h3 class="text-2xl font-bold text-foreground" data-i18n="contact.details.agriculture.title">Informacio per a l'aplicacio agricola</h3>
+                      <p class="text-sm leading-6 text-muted-foreground" data-i18n="contact.details.agriculture.description">Amb quatre dades del tractament podem valorar millor la viabilitat i preparar una primera estimacio.</p>
+                    </div>
+                    <div>
+                      <label for="agri-location-mobile" class="field-label" data-i18n="contact.details.agriculture.fields.location.label">Ubicacio o finca</label>
+                      <input id="agri-location-mobile" name="agriLocation" class="input-field" maxlength="120" placeholder="Municipi, finca o parcel·la" data-i18n-placeholder="contact.details.agriculture.fields.location.placeholder" data-work-detail="agriculture" data-layout="mobile" />
+                    </div>
+                    <div class="grid gap-4 sm:grid-cols-2">
+                      <div>
+                        <label for="agri-product-mobile" class="field-label" data-i18n="contact.details.agriculture.fields.product.label">Producte a aplicar</label>
+                        <input id="agri-product-mobile" name="agriProduct" class="input-field" maxlength="80" placeholder="Ex. fitosanitari o bioestimulant" data-i18n-placeholder="contact.details.agriculture.fields.product.placeholder" data-work-detail="agriculture" data-layout="mobile" />
+                      </div>
+                      <div>
+                        <label for="agri-date-mobile" class="field-label" data-i18n="contact.details.agriculture.fields.date.label">Data orientativa</label>
+                        <input id="agri-date-mobile" name="agriDate" type="date" class="input-field" data-work-detail="agriculture" data-layout="mobile" />
+                      </div>
+                    </div>
+                    <div class="grid gap-4 sm:grid-cols-2">
+                      <div>
+                        <label for="agri-quantity-mobile" class="field-label" data-i18n="contact.details.agriculture.fields.quantity.label">Quantitat prevista</label>
+                        <input id="agri-quantity-mobile" name="agriQuantity" class="input-field" maxlength="60" placeholder="Ex. 80 L o 25 kg" data-i18n-placeholder="contact.details.agriculture.fields.quantity.placeholder" data-work-detail="agriculture" data-layout="mobile" />
+                      </div>
+                      <div>
+                        <label for="agri-hectares-mobile" class="field-label" data-i18n="contact.details.agriculture.fields.hectares.label">Hectarees aproximades</label>
+                        <input id="agri-hectares-mobile" name="agriHectares" class="input-field" maxlength="60" placeholder="Ex. 6 ha" data-i18n-placeholder="contact.details.agriculture.fields.hectares.placeholder" data-work-detail="agriculture" data-layout="mobile" />
+                      </div>
+                    </div>
+                    <div>
+                      <label for="agri-crop-mobile" class="field-label" data-i18n="contact.details.agriculture.fields.crop.label">Cultiu</label>
+                      <input id="agri-crop-mobile" name="agriCrop" class="input-field" maxlength="80" placeholder="Ex. olivera, vinya o fruiters" data-i18n-placeholder="contact.details.agriculture.fields.crop.placeholder" data-work-detail="agriculture" data-layout="mobile" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-5 flex flex-1 flex-col">
+              <label for="message" class="field-label" data-i18n="contact.form.messageLabel">Observacions</label>
+              <textarea id="message" name="message" class="textarea-field flex-1 resize-y" placeholder="Observacions o detalls addicionals..." rows="8" maxlength="1000" data-i18n-placeholder="contact.form.messagePlaceholder"></textarea>
+            </div>
+
+            <p class="mt-5 hidden rounded-lg border border-primary/20 bg-primary/10 px-4 py-3 text-sm text-primary" data-form-status data-i18n-success="contact.form.success" role="status"></p>
+            <button type="submit" class="btn btn-lg btn-primary mt-5 w-full" data-i18n="contact.form.send">Envia missatge</button>
+          </div>
+        </div>
+
+        <div class="flex flex-col">
+          <div class="mb-0 hidden max-h-0 overflow-hidden opacity-0 transition-all duration-300 ease-out lg:block" data-work-panel-shell data-layout="desktop" aria-hidden="true">
+            <aside class="rounded-lg border border-border bg-card p-8 shadow-md">
+              <div class="hidden space-y-5" data-work-panel="survey" data-layout="desktop">
+                <div class="space-y-2">
+                  <p class="text-sm font-semibold uppercase tracking-[0.22em] text-muted-foreground" data-i18n="contact.details.eyebrow">Dades inicials</p>
+                  <h3 class="text-2xl font-bold text-foreground" data-i18n="contact.details.survey.title">Informacio per al levantament topografic</h3>
+                  <p class="text-sm leading-6 text-muted-foreground" data-i18n="contact.details.survey.description">Amb aquestes dades podem fer-nos una idea rapida de l'entorn, l'escala del treball i el lliurament esperat.</p>
+                </div>
+                <div>
+                  <label for="survey-location-desktop" class="field-label" data-i18n="contact.details.survey.fields.location.label">Ubicacio o finca</label>
+                  <input id="survey-location-desktop" name="surveyLocation" class="input-field" maxlength="120" placeholder="Municipi, finca o referencia" data-i18n-placeholder="contact.details.survey.fields.location.placeholder" data-work-detail="survey" data-layout="desktop" />
+                </div>
+                <div class="grid gap-4 sm:grid-cols-2">
+                  <div>
+                    <label for="survey-area-desktop" class="field-label" data-i18n="contact.details.survey.fields.area.label">Superficie aproximada</label>
+                    <input id="survey-area-desktop" name="surveyArea" class="input-field" maxlength="60" placeholder="Ex. 12 ha" data-i18n-placeholder="contact.details.survey.fields.area.placeholder" data-work-detail="survey" data-layout="desktop" />
+                  </div>
+                  <div>
+                    <label for="survey-date-desktop" class="field-label" data-i18n="contact.details.survey.fields.date.label">Data orientativa</label>
+                    <input id="survey-date-desktop" name="surveyDate" type="date" class="input-field" data-work-detail="survey" data-layout="desktop" />
+                  </div>
+                </div>
+                <div>
+                  <label for="survey-delivery-desktop" class="field-label" data-i18n="contact.details.survey.fields.delivery.label">Que necessites rebre</label>
+                  <input id="survey-delivery-desktop" name="surveyDelivery" class="input-field" maxlength="80" placeholder="Ex. corbes de nivell o model digital" data-i18n-placeholder="contact.details.survey.fields.delivery.placeholder" data-work-detail="survey" data-layout="desktop" />
+                </div>
+              </div>
+
+              <div class="hidden space-y-5" data-work-panel="model3d" data-layout="desktop">
+                <div class="space-y-2">
+                  <p class="text-sm font-semibold uppercase tracking-[0.22em] text-muted-foreground" data-i18n="contact.details.eyebrow">Dades inicials</p>
+                  <h3 class="text-2xl font-bold text-foreground" data-i18n="contact.details.model3d.title">Informacio per al model 3D</h3>
+                  <p class="text-sm leading-6 text-muted-foreground" data-i18n="contact.details.model3d.description">Ens ajuda saber quin espai s'ha de modelar, per a que servira i quin nivell de detall t'interessa.</p>
+                </div>
+                <div>
+                  <label for="model-location-desktop" class="field-label" data-i18n="contact.details.model3d.fields.location.label">Ubicacio del projecte</label>
+                  <input id="model-location-desktop" name="modelLocation" class="input-field" maxlength="120" placeholder="Municipi, finca o actiu" data-i18n-placeholder="contact.details.model3d.fields.location.placeholder" data-work-detail="model3d" data-layout="desktop" />
+                </div>
+                <div class="grid gap-4 sm:grid-cols-2">
+                  <div>
+                    <label for="model-area-desktop" class="field-label" data-i18n="contact.details.model3d.fields.area.label">Superficie o dimensions</label>
+                    <input id="model-area-desktop" name="modelArea" class="input-field" maxlength="60" placeholder="Ex. 4 ha o 300 x 200 m" data-i18n-placeholder="contact.details.model3d.fields.area.placeholder" data-work-detail="model3d" data-layout="desktop" />
+                  </div>
+                  <div>
+                    <label for="model-date-desktop" class="field-label" data-i18n="contact.details.model3d.fields.date.label">Data orientativa</label>
+                    <input id="model-date-desktop" name="modelDate" type="date" class="input-field" data-work-detail="model3d" data-layout="desktop" />
+                  </div>
+                </div>
+                <div class="grid gap-4 sm:grid-cols-2">
+                  <div>
+                    <label for="model-goal-desktop" class="field-label" data-i18n="contact.details.model3d.fields.goal.label">Objectiu del model</label>
+                    <input id="model-goal-desktop" name="modelGoal" class="input-field" maxlength="80" placeholder="Ex. analisi tecnica o presentacio" data-i18n-placeholder="contact.details.model3d.fields.goal.placeholder" data-work-detail="model3d" data-layout="desktop" />
+                  </div>
+                  <div>
+                    <label for="model-detail-desktop" class="field-label" data-i18n="contact.details.model3d.fields.detail.label">Nivell de detall esperat</label>
+                    <input id="model-detail-desktop" name="modelDetail" class="input-field" maxlength="80" placeholder="Ex. visual general o detall alt" data-i18n-placeholder="contact.details.model3d.fields.detail.placeholder" data-work-detail="model3d" data-layout="desktop" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="hidden space-y-5" data-work-panel="agriculture" data-layout="desktop">
+                <div class="space-y-2">
+                  <p class="text-sm font-semibold uppercase tracking-[0.22em] text-muted-foreground" data-i18n="contact.details.eyebrow">Dades inicials</p>
+                  <h3 class="text-2xl font-bold text-foreground" data-i18n="contact.details.agriculture.title">Informacio per a l'aplicacio agricola</h3>
+                  <p class="text-sm leading-6 text-muted-foreground" data-i18n="contact.details.agriculture.description">Amb quatre dades del tractament podem valorar millor la viabilitat i preparar una primera estimacio.</p>
+                </div>
+                <div>
+                  <label for="agri-location-desktop" class="field-label" data-i18n="contact.details.agriculture.fields.location.label">Ubicacio o finca</label>
+                  <input id="agri-location-desktop" name="agriLocation" class="input-field" maxlength="120" placeholder="Municipi, finca o parcel·la" data-i18n-placeholder="contact.details.agriculture.fields.location.placeholder" data-work-detail="agriculture" data-layout="desktop" />
+                </div>
+                <div class="grid gap-4 sm:grid-cols-2">
+                  <div>
+                    <label for="agri-product-desktop" class="field-label" data-i18n="contact.details.agriculture.fields.product.label">Producte a aplicar</label>
+                    <input id="agri-product-desktop" name="agriProduct" class="input-field" maxlength="80" placeholder="Ex. fitosanitari o bioestimulant" data-i18n-placeholder="contact.details.agriculture.fields.product.placeholder" data-work-detail="agriculture" data-layout="desktop" />
+                  </div>
+                  <div>
+                    <label for="agri-date-desktop" class="field-label" data-i18n="contact.details.agriculture.fields.date.label">Data orientativa</label>
+                    <input id="agri-date-desktop" name="agriDate" type="date" class="input-field" data-work-detail="agriculture" data-layout="desktop" />
+                  </div>
+                </div>
+                <div class="grid gap-4 sm:grid-cols-2">
+                  <div>
+                    <label for="agri-quantity-desktop" class="field-label" data-i18n="contact.details.agriculture.fields.quantity.label">Quantitat prevista</label>
+                    <input id="agri-quantity-desktop" name="agriQuantity" class="input-field" maxlength="60" placeholder="Ex. 80 L o 25 kg" data-i18n-placeholder="contact.details.agriculture.fields.quantity.placeholder" data-work-detail="agriculture" data-layout="desktop" />
+                  </div>
+                  <div>
+                    <label for="agri-hectares-desktop" class="field-label" data-i18n="contact.details.agriculture.fields.hectares.label">Hectarees aproximades</label>
+                    <input id="agri-hectares-desktop" name="agriHectares" class="input-field" maxlength="60" placeholder="Ex. 6 ha" data-i18n-placeholder="contact.details.agriculture.fields.hectares.placeholder" data-work-detail="agriculture" data-layout="desktop" />
+                  </div>
+                </div>
+                <div>
+                  <label for="agri-crop-desktop" class="field-label" data-i18n="contact.details.agriculture.fields.crop.label">Cultiu</label>
+                  <input id="agri-crop-desktop" name="agriCrop" class="input-field" maxlength="80" placeholder="Ex. olivera, vinya o fruiters" data-i18n-placeholder="contact.details.agriculture.fields.crop.placeholder" data-work-detail="agriculture" data-layout="desktop" />
+                </div>
+              </div>
+            </aside>
+          </div>
+
+          <div class="rounded-lg border border-border bg-card p-8 shadow-md">
+            <div class="flex flex-col gap-8">
+              <div class="flex items-start gap-4">
+                <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg bg-primary/10"><Mail className="h-5 w-5 text-primary" /></div>
+                <div>
+                  <h3 class="font-semibold text-foreground" data-i18n="contact.info.emailLabel">Correu electronic</h3>
+                  <p class="text-sm text-muted-foreground" data-i18n="contact.info.emailValue">XXXXXXX</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg bg-primary/10"><Phone className="h-5 w-5 text-primary" /></div>
+                <div>
+                  <h3 class="font-semibold text-foreground" data-i18n="contact.info.phoneLabel">Telefon</h3>
+                  <p class="text-sm text-muted-foreground" data-i18n="contact.info.phoneValue">XXXXXXX</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg bg-primary/10"><MapPin className="h-5 w-5 text-primary" /></div>
+                <div>
+                  <h3 class="font-semibold text-foreground" data-i18n="contact.info.areaLabel">Ubicacio i ambit</h3>
+                  <p class="text-sm text-muted-foreground" data-i18n="contact.info.areaValue">Tarragona i servei a tot Catalunya</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+
+<script>
+  const form = document.querySelector("[data-contact-form]");
+  const status = form?.querySelector("[data-form-status]");
+  const workTypeInputs = Array.from(form?.querySelectorAll("[data-work-type-input]") || []);
+  const panelShells = Array.from(form?.querySelectorAll("[data-work-panel-shell]") || []);
+  const panels = Array.from(form?.querySelectorAll("[data-work-panel]") || []);
+  const detailFields = Array.from(form?.querySelectorAll("[data-work-detail]") || []);
+  const workTypeAlert = form?.querySelector("[data-form-alert-worktype]");
+  const detailsAlert = form?.querySelector("[data-form-alert-details]");
+  const phoneInput = form?.querySelector("#phone");
+
+  const getActiveLayout = () => (window.matchMedia("(min-width: 1024px)").matches ? "desktop" : "mobile");
+
+  const isValidPhoneNumber = (value) => {
+    const trimmed = value.trim();
+    if (!trimmed) return true;
+    if (!/^\+?[0-9\s().-]+$/.test(trimmed)) return false;
+    const digits = trimmed.replace(/\D/g, "");
+    return digits.length >= 9 && digits.length <= 15;
+  };
+
+  const syncDetailValue = (sourceField) => {
+    if (!(sourceField instanceof HTMLInputElement) && !(sourceField instanceof HTMLTextAreaElement) && !(sourceField instanceof HTMLSelectElement)) {
+      return;
+    }
+
+    detailFields.forEach((field) => {
+      if (
+        (field instanceof HTMLInputElement || field instanceof HTMLTextAreaElement || field instanceof HTMLSelectElement) &&
+        field !== sourceField &&
+        field.name === sourceField.name
+      ) {
+        field.value = sourceField.value;
+      }
+    });
+  };
+
+  const updateWorkPanel = () => {
+    if (!(form instanceof HTMLFormElement)) return;
+
+    const selected = form.querySelector("[data-work-type-input]:checked");
+    const selectedValue = selected instanceof HTMLInputElement ? selected.value : "";
+    const hasSelection = Boolean(selectedValue);
+    const activeLayout = getActiveLayout();
+
+    panels.forEach((panel) => {
+      if (!(panel instanceof HTMLElement)) return;
+      const isVisible = panel.dataset.workPanel === selectedValue && panel.dataset.layout === activeLayout;
+      panel.classList.toggle("hidden", !isVisible);
+    });
+
+    panelShells.forEach((shell) => {
+      if (!(shell instanceof HTMLElement)) return;
+      const isActiveShell = hasSelection && shell.dataset.layout === activeLayout;
+
+      if (shell.dataset.layout === "mobile") {
+        shell.classList.toggle("mt-0", !isActiveShell);
+        shell.classList.toggle("mt-5", isActiveShell);
+      } else {
+        shell.classList.toggle("mb-0", !isActiveShell);
+        shell.classList.toggle("mb-6", isActiveShell);
+      }
+
+      shell.classList.toggle("max-h-0", !isActiveShell);
+      shell.classList.toggle("opacity-0", !isActiveShell);
+      shell.classList.toggle("max-h-[1200px]", isActiveShell);
+      shell.classList.toggle("opacity-100", isActiveShell);
+      shell.setAttribute("aria-hidden", isActiveShell ? "false" : "true");
+    });
+
+    detailFields.forEach((field) => {
+      if (!(field instanceof HTMLInputElement) && !(field instanceof HTMLTextAreaElement) && !(field instanceof HTMLSelectElement)) {
+        return;
+      }
+
+      const isActive = field.dataset.workDetail === selectedValue && field.dataset.layout === activeLayout;
+      field.disabled = !isActive;
+      field.required = isActive;
+    });
+  };
+
+  workTypeInputs.forEach((input) => input.addEventListener("change", updateWorkPanel));
+
+  detailFields.forEach((field) => {
+    if (field instanceof HTMLInputElement || field instanceof HTMLTextAreaElement || field instanceof HTMLSelectElement) {
+      field.addEventListener("input", () => syncDetailValue(field));
+      field.addEventListener("change", () => syncDetailValue(field));
+    }
+  });
+
+  if (phoneInput instanceof HTMLInputElement) {
+    phoneInput.addEventListener("input", () => phoneInput.setCustomValidity(""));
+  }
+
+  window.addEventListener("resize", updateWorkPanel, { passive: true });
+  updateWorkPanel();
+
+  form?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    if (!(form instanceof HTMLFormElement) || !(status instanceof HTMLElement)) return;
+
+    const activeLayout = getActiveLayout();
+    const selected = form.querySelector("[data-work-type-input]:checked");
+    const selectedValue = selected instanceof HTMLInputElement ? selected.value : "";
+
+    if (!selectedValue) {
+      alert(
+        workTypeAlert instanceof HTMLElement
+          ? workTypeAlert.textContent?.trim() || "Selecciona un tipus de treball abans d'enviar el formulari."
+          : "Selecciona un tipus de treball abans d'enviar el formulari.",
+      );
+      const firstWorkType = workTypeInputs[0];
+      if (firstWorkType instanceof HTMLElement) firstWorkType.focus();
+      status.classList.add("hidden");
+      return;
+    }
+
+    const firstMissingDetail = detailFields.find((field) => {
+      if (!(field instanceof HTMLInputElement) && !(field instanceof HTMLTextAreaElement) && !(field instanceof HTMLSelectElement)) {
+        return false;
+      }
+
+      return field.dataset.workDetail === selectedValue && field.dataset.layout === activeLayout && !field.value.trim();
+    });
+
+    if (
+      firstMissingDetail instanceof HTMLInputElement ||
+      firstMissingDetail instanceof HTMLTextAreaElement ||
+      firstMissingDetail instanceof HTMLSelectElement
+    ) {
+      alert(
+        detailsAlert instanceof HTMLElement
+          ? detailsAlert.textContent?.trim() || "Omple la informacio inicial del treball seleccionat abans d'enviar el formulari."
+          : "Omple la informacio inicial del treball seleccionat abans d'enviar el formulari.",
+      );
+      firstMissingDetail.focus();
+      status.classList.add("hidden");
+      return;
+    }
+
+    if (phoneInput instanceof HTMLInputElement && !isValidPhoneNumber(phoneInput.value)) {
+      phoneInput.setCustomValidity(phoneInput.dataset.invalidMessage || "Si indiques un telefon, ha de ser valid.");
+      phoneInput.reportValidity();
+      phoneInput.focus();
+      status.classList.add("hidden");
+      return;
+    }
+
+    if (phoneInput instanceof HTMLInputElement) {
+      phoneInput.setCustomValidity("");
+    }
+
+    if (!form.reportValidity()) {
+      status.classList.add("hidden");
+      return;
+    }
+
+    status.textContent = status.dataset.successMessage || "Missatge enviat. Ens posarem en contacte ben aviat.";
+    status.classList.remove("hidden");
+    form.reset();
+
+    detailFields.forEach((field) => {
+      if (field instanceof HTMLInputElement || field instanceof HTMLTextAreaElement || field instanceof HTMLSelectElement) {
+        field.value = "";
+      }
+    });
+
+    updateWorkPanel();
+  });
+</script>

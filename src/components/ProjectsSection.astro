@@ -1,0 +1,62 @@
+---
+import ndviImage from "@/assets/ndvi-analysis.jpg";
+import terrainMapping from "@/assets/terrain-mapping.jpg";
+import terrainModel from "@/assets/terrain-model.jpg";
+
+const projects = [
+  {
+    image: terrainModel,
+    title: "Model digital 3D del terreny",
+    category: "Topografia",
+    alt: "Model tridimensional del terreny generat amb dades de dron",
+  },
+  {
+    image: terrainMapping,
+    title: "Analisi topografica del terreny",
+    category: "Aixecament del terreny",
+    alt: "Treball topografic aeria sobre paisatge rural",
+  },
+  {
+    image: ndviImage,
+    title: "Aplicacions agricoles amb dron",
+    category: "Serveis agricoles",
+    alt: "Dron treballant en serveis i aplicacions agricoles sobre cultius",
+  },
+];
+---
+
+<section id="projects" class="section-padding topo-lines bg-background">
+  <div class="container-narrow">
+    <div class="mb-16 text-center">
+      <span class="text-sm font-semibold uppercase tracking-widest text-muted-foreground" data-i18n="projects.eyebrow">Projectes</span>
+      <h2 class="mt-2 text-3xl font-bold text-foreground md:text-4xl" data-i18n="projects.title">Projectes destacats</h2>
+    </div>
+
+    <div class="grid gap-6 sm:grid-cols-2">
+      {
+        projects.map((project, index) => (
+          <article
+            class={`card-hover group relative overflow-hidden rounded-lg shadow-lg ${
+              projects.length % 2 === 1 && index === projects.length - 1
+                ? "sm:col-span-2 sm:mx-auto sm:w-[calc(50%-0.75rem)]"
+                : ""
+            }`}
+          >
+            <img
+              src={project.image.src}
+              alt={project.alt}
+              data-i18n-alt={`projects.items.${index}.alt`}
+              class="h-64 w-full object-cover transition-transform duration-500 group-hover:scale-105 md:h-80"
+              loading="lazy"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-foreground/70 via-foreground/20 to-transparent"></div>
+            <div class="absolute bottom-0 left-0 right-0 p-6">
+              <span class="text-xs font-semibold uppercase tracking-wider text-accent" data-i18n={`projects.items.${index}.category`}>{project.category}</span>
+              <h3 class="mt-1 text-lg font-bold text-primary-foreground" data-i18n={`projects.items.${index}.title`}>{project.title}</h3>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
