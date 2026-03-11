@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import ndviImage from "@/assets/ndvi-analysis.jpg";
 import terrainMapping from "@/assets/terrain-mapping.jpg";
 import terrainModel from "@/assets/terrain-model.jpg";
@@ -42,12 +43,21 @@ const projects = [
                 : ""
             }`}
           >
-            <img
-              src={project.image.src}
+            <Image
+              src={project.image}
               alt={project.alt}
+              format="webp"
+              widths={[360, 560, 760, 1024]}
+              sizes={
+                projects.length % 2 === 1 && index === projects.length - 1
+                  ? "(min-width: 640px) 50vw, 100vw"
+                  : "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+              }
+              quality={68}
+              loading="lazy"
+              decoding="async"
               data-i18n-alt={`projects.items.${index}.alt`}
               class="h-64 w-full object-cover transition-transform duration-500 group-hover:scale-105 md:h-80"
-              loading="lazy"
             />
             <div class="absolute inset-0 bg-gradient-to-t from-foreground/70 via-foreground/20 to-transparent"></div>
             <div class="absolute bottom-0 left-0 right-0 p-6">

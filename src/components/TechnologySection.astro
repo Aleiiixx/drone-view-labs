@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import droneImage from "@/assets/matrice-400-l3.webp";
 import { BarChart3, Camera, Cpu, Navigation } from "lucide-react";
 
@@ -30,9 +31,14 @@ const techItems = [
   <div class="container-narrow">
     <div class="grid items-center gap-12 lg:grid-cols-2">
       <div class="relative overflow-hidden rounded-lg shadow-2xl">
-        <img
-          src={droneImage.src}
+        <Image
+          src={droneImage}
           alt="Dron professional fent una presa de dades sobre terreny agricola"
+          widths={[380, 640, 860]}
+          sizes="(min-width: 1024px) 50vw, 100vw"
+          quality={72}
+          loading="lazy"
+          decoding="async"
           data-i18n-alt="technology.imageAlt"
           class="h-80 w-full object-cover object-[78%_center] lg:h-[480px]"
         />

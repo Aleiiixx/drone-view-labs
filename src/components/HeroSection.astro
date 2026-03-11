@@ -1,19 +1,27 @@
 ---
+import { Image } from "astro:assets";
 import heroImage from "@/assets/hero-aerial.jpg";
 ---
 
 <section id="top" class="relative flex min-h-screen items-center justify-center overflow-hidden">
   <div class="absolute inset-0">
-    <img
-      src={heroImage.src}
+    <Image
+      src={heroImage}
       alt="Vista aeria d'un camp capturada amb dron"
+      format="webp"
+      widths={[480, 768, 1024, 1280, 1536]}
+      sizes="100vw"
+      quality={64}
+      loading="eager"
+      fetchpriority="high"
+      decoding="async"
       data-i18n-alt="hero.imageAlt"
       class="h-full w-full object-cover"
     />
     <div class="absolute inset-0 bg-foreground/60"></div>
   </div>
 
-  <svg class="pointer-events-none absolute inset-0 h-full w-full opacity-10" xmlns="http://www.w3.org/2000/svg">
+  <svg class="pointer-events-none absolute inset-0 hidden h-full w-full opacity-10 md:block" xmlns="http://www.w3.org/2000/svg">
     <path
       d="M0,300 Q200,250 400,300 T800,300 T1200,280 T1600,300 T2000,290"
       fill="none"
@@ -44,23 +52,21 @@ import heroImage from "@/assets/hero-aerial.jpg";
 
   <div class="container-narrow relative z-10 px-4 pt-20 text-center md:px-8">
     <h1
-      class="animate-fade-up text-4xl font-extrabold leading-tight text-primary-foreground md:text-6xl lg:text-7xl"
+      class="text-4xl font-extrabold leading-tight text-primary-foreground md:text-6xl lg:text-7xl"
       data-i18n-html="hero.title"
     >
       Intel·ligencia aeria per a l'agricultura<br class="hidden md:block" />
       i la topografia del terreny
     </h1>
     <p
-      class="mx-auto mt-6 max-w-2xl animate-fade-up text-lg text-primary-foreground/80 md:text-xl"
-      style="animation-delay: 0.2s;"
+      class="mx-auto mt-6 max-w-2xl text-lg text-primary-foreground/80 md:text-xl"
       data-i18n="hero.description"
     >
       Serveis professionals amb dron des de Tarragona per a topografia, models 3D del terreny,
       aplicacions agricoles i analisi geoespacial. Dades utiles per prendre millors decisions.
     </p>
     <div
-      class="mt-10 flex animate-fade-up flex-col items-center justify-center gap-4 sm:flex-row"
-      style="animation-delay: 0.4s;"
+      class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
     >
       <a href="#contact" class="btn btn-lg btn-primary" data-i18n="hero.quote">
         Demana pressupost
