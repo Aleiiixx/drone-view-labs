@@ -36,18 +36,18 @@ import { Mail, MapPin, Phone } from "lucide-react";
           <div class="flex min-h-full w-full flex-col">
             <div>
               <label for="name" class="field-label" data-i18n="contact.form.nameLabel">Nom *</label>
-              <input id="name" name="name" class="input-field" placeholder="El teu nom complet" maxlength="100" required data-i18n-placeholder="contact.form.namePlaceholder" />
+              <input id="name" name="name" class="input-field" placeholder="Nom i cognoms" maxlength="100" required data-i18n-placeholder="contact.form.namePlaceholder" />
             </div>
 
             <div class="mt-5 grid gap-5 sm:grid-cols-2">
               <div>
                 <label for="email" class="field-label" data-i18n="contact.form.emailLabel">Correu electronic *</label>
-                <input id="email" name="email" type="email" class="input-field" placeholder="XXXXXXX" maxlength="255" required data-i18n-placeholder="contact.form.emailPlaceholder" />
+                <input id="email" name="email" type="email" class="input-field" placeholder="nom@empresa.com" maxlength="255" required data-i18n-placeholder="contact.form.emailPlaceholder" />
               </div>
 
               <div>
                 <label for="phone" class="field-label" data-i18n="contact.form.phoneLabel">Telefon</label>
-                <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" class="input-field" placeholder="XXXXXXX" maxlength="20" data-i18n-placeholder="contact.form.phonePlaceholder" data-i18n-invalid="contact.form.phoneInvalid" />
+                <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" class="input-field" placeholder="+34 600 000 000" maxlength="20" data-i18n-placeholder="contact.form.phonePlaceholder" data-i18n-invalid="contact.form.phoneInvalid" />
               </div>
             </div>
 
@@ -294,7 +294,7 @@ import { Mail, MapPin, Phone } from "lucide-react";
                 <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg bg-primary/10"><Mail className="h-5 w-5 text-primary" /></div>
                 <div>
                   <h3 class="font-semibold text-foreground" data-i18n="contact.info.emailLabel">Correu electronic</h3>
-                  <p class="text-sm text-muted-foreground" data-i18n="contact.info.emailValue">XXXXXXX</p>
+                  <p class="text-sm text-muted-foreground" data-i18n="contact.info.emailValue">info@servidrone.cat</p>
                 </div>
               </div>
 
@@ -302,7 +302,7 @@ import { Mail, MapPin, Phone } from "lucide-react";
                 <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg bg-primary/10"><Phone className="h-5 w-5 text-primary" /></div>
                 <div>
                   <h3 class="font-semibold text-foreground" data-i18n="contact.info.phoneLabel">Telefon</h3>
-                  <p class="text-sm text-muted-foreground" data-i18n="contact.info.phoneValue">XXXXXXX</p>
+                  <p class="text-sm text-muted-foreground" data-i18n="contact.info.phoneValue">+34 622 00 13 26</p>
                 </div>
               </div>
 
