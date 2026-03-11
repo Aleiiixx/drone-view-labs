@@ -8,6 +8,9 @@ const site = process.env.PUBLIC_SITE_URL?.trim().replace(/\/$/, "");
 
 export default defineConfig({
   site: site || undefined,
+  build: {
+    inlineStylesheets: "always",
+  },
   integrations: [
     react(),
     tailwind({ applyBaseStyles: false }),
