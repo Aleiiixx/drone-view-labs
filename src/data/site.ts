@@ -1,6 +1,7 @@
 export const siteConfig = {
   name: "Servidrone",
   legalName: "Gibosa M2R SL",
+  siteUrl: "https://servidrone.cat",
   defaultLocale: "ca",
   localeMap: {
     ca: "ca_ES",
@@ -13,22 +14,26 @@ export const siteConfig = {
     region: "Catalunya",
     country: "ES",
     areaServed: "Catalunya",
+    addressCountryName: "Spain",
   },
   business: {
     type: "ProfessionalService",
     priceRange: "$$",
+    email: "info@servidrone.cat",
+    telephone: "+34 622 00 13 26",
     services: [
-      "Levantaments topografics amb dron",
+      "Aixecaments topogràfics amb dron",
       "Models digitals 3D del terreny",
-      "Aplicacions agricoles amb dron",
-      "Cartografia tecnica",
-      "Inspeccions aeries",
+      "Aplicacions agrícoles amb dron",
+      "Cartografia tècnica",
+      "Inspeccions aèries",
     ],
   },
-  socialImageAlt: "Vista aeria de camps i terreny capturada amb dron a Tarragona",
+  socialImageAlt: "Vista aèria de camps i terreny capturada amb dron a Tarragona",
 } as const;
 
 export const getSiteUrl = () => {
   const value = import.meta.env.PUBLIC_SITE_URL?.trim();
-  return value ? value.replace(/\/$/, "") : "";
+  const normalized = value ? value.replace(/\/$/, "") : siteConfig.siteUrl;
+  return normalized.replace(/\/$/, "");
 };

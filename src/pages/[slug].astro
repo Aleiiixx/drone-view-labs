@@ -1,0 +1,60 @@
+---
+import FaqSection from "@/components/FaqSection.astro";
+import LeadSection from "@/components/LeadSection.astro";
+import LocalizedNavbar from "@/components/LocalizedNavbar.astro";
+import ServiceLanding from "@/components/ServiceLanding.astro";
+import SiteFooter from "@/components/SiteFooter.astro";
+import { servicePagesContent } from "@/data/service-pages";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { buildServiceStructuredData } from "@/lib/structured-data";
+import {
+  getAbsoluteUrl,
+  getAlternateLinks,
+  getLocalizedPath,
+  serviceRouteKeys,
+  type RouteKey,
+} from "@/lib/routes";
+
+export const getStaticPaths = () =>
+  serviceRouteKeys.map((routeKey) => {
+    const slug = getLocalizedPath("ca", routeKey).split("/").filter(Boolean).pop();
+
+    if (!slug) {
+      throw new Error(`Missing slug for route ${routeKey}`);
+    }
+
+    return {
+      params: { slug },
+      props: { routeKey },
+    };
+  });
+
+interface Props {
+  routeKey: Exclude<RouteKey, "home">;
+}
+
+const locale = "ca";
+const { routeKey } = Astro.props;
+const updatedAt = new Date();
+const content = servicePagesContent[routeKey][locale];
+const modifiedTime = updatedAt.toISOString();
+---
+
+<BaseLayout
+  title={content.metaTitle}
+  description={content.metaDescription}
+  locale={locale}
+  canonicalPath={getLocalizedPath(locale, routeKey)}
+  alternateLinks={getAlternateLinks(routeKey)}
+  xDefaultHref={getAbsoluteUrl(getLocalizedPath("ca", routeKey))}
+  modifiedTime={modifiedTime}
+  structuredData={buildServiceStructuredData({ locale, content, modifiedTime })}
+>
+  <LocalizedNavbar locale={locale} routeKey={routeKey} />
+  <main>
+    <ServiceLanding locale={locale} content={content} />
+    <LeadSection locale={locale} routeKey={routeKey} />
+    <FaqSection locale={locale} title={content.faqTitle} items={content.faqItems} />
+  </main>
+  <SiteFooter locale={locale} routeKey={routeKey} updatedAt={updatedAt} />
+</BaseLayout>

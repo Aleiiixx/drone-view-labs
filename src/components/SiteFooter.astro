@@ -1,0 +1,79 @@
+---
+import { siteConfig } from "@/data/site";
+import { uiContent } from "@/data/ui-content";
+import { formatLongDate } from "@/lib/format";
+import {
+  getLocalizedPath,
+  routeLabels,
+  serviceRouteKeys,
+  type Locale,
+  type RouteKey,
+} from "@/lib/routes";
+
+interface Props {
+  locale: Locale;
+  routeKey: RouteKey;
+  updatedAt: Date;
+}
+
+const { locale, routeKey, updatedAt } = Astro.props;
+const ui = uiContent[locale];
+const year = new Date().getFullYear();
+const servicesLabel = {
+  ca: "Serveis",
+  es: "Servicios",
+  en: "Services",
+}[locale];
+---
+
+<footer class="bg-foreground px-4 py-10 sm:px-6 md:px-8 md:py-12">
+  <div class="container-narrow">
+    <div class="grid gap-10 md:grid-cols-[minmax(0,1.2fr)_repeat(2,minmax(0,1fr))]">
+      <div>
+        <a href={getLocalizedPath(locale, "home")} class="text-xl font-bold tracking-tight text-primary-foreground">
+          SERVIDRONE
+        </a>
+        <p class="mt-3 max-w-md text-sm text-primary-foreground/70">{ui.footerTagline}</p>
+      </div>
+
+      <div>
+        <p class="text-sm font-semibold uppercase tracking-widest text-primary-foreground/70">{servicesLabel}</p>
+        <div class="mt-4 space-y-2 text-sm text-primary-foreground/60">
+          <a href={getLocalizedPath(locale, "home")} class={`block transition-colors hover:text-primary-foreground ${routeKey === "home" ? "text-primary-foreground" : ""}`}>
+            {routeLabels.home[locale]}
+          </a>
+          {
+            serviceRouteKeys.map((serviceKey) => (
+              <a
+                href={getLocalizedPath(locale, serviceKey)}
+                class={`block transition-colors hover:text-primary-foreground ${
+                  routeKey === serviceKey ? "text-primary-foreground" : ""
+                }`}
+              >
+                {routeLabels[serviceKey][locale]}
+              </a>
+            ))
+          }
+        </div>
+      </div>
+
+      <div>
+        <p class="text-sm font-semibold uppercase tracking-widest text-primary-foreground/70">{ui.footerContact}</p>
+        <div class="mt-4 space-y-2 text-sm text-primary-foreground/60">
+          <a href={`mailto:${siteConfig.business.email}`} class="block transition-colors hover:text-primary-foreground">
+            {siteConfig.business.email}
+          </a>
+          <a href={`tel:${siteConfig.business.telephone.replace(/\s+/g, "")}`} class="block transition-colors hover:text-primary-foreground">
+            {siteConfig.business.telephone}
+          </a>
+          <p>{ui.footerCoverage}: {ui.footerCoverageValue}</p>
+          <p>{ui.footerUpdated}: {formatLongDate(locale, updatedAt)}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-8 border-t border-primary-foreground/10 pt-8 text-sm text-primary-foreground/60">
+      <p>© {year} {siteConfig.name}. {siteConfig.legalName}.</p>
+    </div>
+  </div>
+</footer>

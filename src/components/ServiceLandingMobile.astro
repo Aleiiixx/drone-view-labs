@@ -1,0 +1,194 @@
+---
+import { Image } from "astro:assets";
+import { CalendarDays, Camera, FileText, Layers3, Map, Plane, Search, ShieldCheck, Sprout, Target } from "lucide-react";
+import modelImage from "@/assets/terrain-model.jpg";
+import mappingImage from "@/assets/terrain-mapping.jpg";
+import ndviImage from "@/assets/T50.webp";
+import Breadcrumbs from "@/components/Breadcrumbs.astro";
+import { uiContent } from "@/data/ui-content";
+import { routeLabels, getLocalizedPath, type Locale, type RouteKey } from "@/lib/routes";
+import type { ServicePageContent } from "@/data/content-types";
+
+interface Props {
+  locale: Locale;
+  content: ServicePageContent;
+}
+
+const { locale, content } = Astro.props;
+const ui = uiContent[locale];
+
+const images: Record<Exclude<RouteKey, "home">, typeof modelImage> = {
+  topography: modelImage,
+  agriculture: ndviImage,
+  inspections: mappingImage,
+};
+
+const processIcons = {
+  topography: [Search, Plane, Layers3, FileText],
+  agriculture: [Search, ShieldCheck, CalendarDays, Sprout],
+  inspections: [Target, Plane, Camera, Map],
+} as const;
+
+const processIconSet = processIcons[content.routeKey];
+
+const copy = {
+  ca: {
+    summary: "Resum",
+    deliverables: "Lliuraments",
+    fit: "Quan encaixa",
+    process: "Procés",
+  },
+  es: {
+    summary: "Resumen",
+    deliverables: "Entregables",
+    fit: "Cuándo encaja",
+    process: "Proceso",
+  },
+  en: {
+    summary: "Summary",
+    deliverables: "Deliverables",
+    fit: "Best fit",
+    process: "Process",
+  },
+}[locale];
+---
+
+<div class="md:hidden">
+  <section class="section-padding bg-card pt-24">
+    <div class="container-narrow">
+      <Breadcrumbs
+        items={[
+          { label: routeLabels.home[locale], href: getLocalizedPath(locale, "home") },
+          { label: routeLabels[content.routeKey][locale] },
+        ]}
+        separator={ui.breadcrumbSeparator}
+      />
+
+      <div class="mt-5 space-y-5">
+        <span class="inline-flex rounded-full border border-primary/20 bg-primary/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-primary">
+          {content.heroEyebrow}
+        </span>
+        <h1 class="text-3xl font-bold leading-tight text-foreground">{content.heroTitle}</h1>
+        <p class="text-base leading-7 text-muted-foreground">{content.heroDescription}</p>
+
+        <div class="overflow-hidden rounded-[2rem] border border-border bg-background shadow-sm">
+          <Image
+            src={images[content.routeKey]}
+            alt={content.heroTitle}
+            widths={[420, 720, 1080]}
+            sizes="100vw"
+            quality={64}
+            class="h-56 w-full object-cover"
+          />
+        </div>
+
+        <div class="space-y-3">
+          {
+            content.heroBullets.map((item) => (
+              <article class="rounded-[1.75rem] border border-border bg-background p-4 shadow-sm">
+                <div class="flex items-start gap-3">
+                  <span class="mt-2 h-1.5 w-1.5 rounded-full bg-accent"></span>
+                  <p class="text-sm leading-6 text-foreground">{item}</p>
+                </div>
+              </article>
+            ))
+          }
+        </div>
+
+        <div class="grid gap-3 pt-1">
+          <a href={content.primaryCta.href} class="btn btn-lg btn-primary w-full">
+            {content.primaryCta.label}
+          </a>
+          <a href={content.secondaryCta.href} class="btn btn-lg w-full border border-border bg-background text-foreground hover:border-primary/40">
+            {content.secondaryCta.label}
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-padding topo-lines bg-background">
+    <div class="container-narrow space-y-5">
+      <article class="rounded-[2rem] border border-border bg-card p-5 shadow-sm">
+        <span class="text-xs font-semibold uppercase tracking-[0.24em] text-muted-foreground">{copy.summary}</span>
+        <h2 class="mt-3 text-2xl font-bold text-foreground">{content.overviewTitle}</h2>
+        <div class="mt-5 space-y-4 text-sm leading-7 text-muted-foreground">
+          {content.overviewParagraphs.map((paragraph) => <p>{paragraph}</p>)}
+        </div>
+      </article>
+
+      <article class="rounded-[2rem] border border-border bg-card p-5 shadow-sm">
+        <span class="text-xs font-semibold uppercase tracking-[0.24em] text-muted-foreground">{copy.deliverables}</span>
+        <h2 class="mt-3 text-2xl font-bold text-foreground">{content.deliverablesTitle}</h2>
+        <ul class="mt-5 space-y-3">
+          {
+            content.deliverables.map((item) => (
+              <li class="flex items-start gap-3 rounded-2xl bg-background p-4 text-sm leading-6 text-foreground">
+                <span class="mt-2 h-1.5 w-1.5 rounded-full bg-accent"></span>
+                <span>{item}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section class="section-padding bg-card">
+    <div class="container-narrow">
+      <span class="text-xs font-semibold uppercase tracking-[0.24em] text-muted-foreground">{copy.fit}</span>
+      <h2 class="mt-3 text-2xl font-bold text-foreground">{content.fitTitle}</h2>
+
+      <div class="mt-6 space-y-3">
+        {
+          content.fitItems.map((item, index) => (
+            <article class="rounded-[1.75rem] border border-border bg-background p-4 shadow-sm">
+              <div class="flex items-start gap-3">
+                <span class="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-primary/10 text-sm font-semibold text-primary">
+                  {index + 1}
+                </span>
+                <p class="text-sm leading-6 text-foreground">{item}</p>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+
+      <div class="mt-10 border-t border-border pt-10">
+        <span class="text-xs font-semibold uppercase tracking-[0.24em] text-muted-foreground">{copy.process}</span>
+        <h2 class="mt-3 text-2xl font-bold text-foreground">{content.processTitle}</h2>
+
+        <div class="mt-6 space-y-4">
+          {
+            content.processSteps.map((step, index) => {
+              const StepIcon = processIconSet[index] ?? FileText;
+              const isLast = index === content.processSteps.length - 1;
+
+              return (
+                <div class="relative pl-14">
+                  {!isLast && <span class="absolute bottom-[-1.25rem] left-5 top-12 w-px bg-border"></span>}
+
+                  <div class="absolute left-0 top-0 z-10 flex h-10 w-10 items-center justify-center rounded-full border-4 border-card bg-primary text-primary-foreground shadow-sm">
+                    <span class="text-sm font-bold tracking-[0.16em]">{index + 1}</span>
+                  </div>
+
+                  <article class="rounded-[2rem] border border-border bg-background p-5 shadow-sm">
+                    <div class="flex items-start gap-3">
+                      <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-2xl bg-primary/10">
+                        <StepIcon className="h-5 w-5 text-primary" />
+                      </div>
+                      <div class="min-w-0">
+                        <h3 class="text-lg font-bold text-foreground">{step.title}</h3>
+                      </div>
+                    </div>
+                    <p class="mt-3 text-sm leading-6 text-muted-foreground">{step.description}</p>
+                  </article>
+                </div>
+              );
+            })
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

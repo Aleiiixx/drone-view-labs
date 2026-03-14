@@ -1,0 +1,292 @@
+---
+import { Image } from "astro:assets";
+import heroImage from "@/assets/hero-aerial.jpg";
+import droneImage from "@/assets/matrice-400-l3.webp";
+import terrainModel from "@/assets/terrain-model.jpg";
+import HomePageContentMobile from "@/components/HomePageContentMobile.astro";
+import { homeContent } from "@/data/home-content";
+import { getLocalizedPath, type Locale } from "@/lib/routes";
+import { Camera, Map, Sprout } from "lucide-react";
+
+interface Props {
+  locale: Locale;
+  updatedAt: Date;
+}
+
+const { locale, updatedAt } = Astro.props;
+const content = homeContent[locale];
+const copy = {
+  ca: {
+    searchIntent: "Serveis",
+    authority: "Enfocament",
+    deliverables: "Lliuraments",
+    sectors: "Sectors",
+    comparison: "Comparativa",
+    service: "Servei",
+    outputs: "Lliuraments",
+    fit: "Ideal per",
+    drone: "Dron",
+    traditional: "Tradicional",
+  },
+  es: {
+    searchIntent: "Servicios",
+    authority: "Enfoque",
+    deliverables: "Entregables",
+    sectors: "Sectores",
+    comparison: "Comparativa",
+    service: "Servicio",
+    outputs: "Entregables",
+    fit: "Ideal para",
+    drone: "Dron",
+    traditional: "Tradicional",
+  },
+  en: {
+    searchIntent: "Services",
+    authority: "Approach",
+    deliverables: "Deliverables",
+    sectors: "Sectors",
+    comparison: "Comparison",
+    service: "Service",
+    outputs: "Deliverables",
+    fit: "Best fit",
+    drone: "Drone",
+    traditional: "Traditional",
+  },
+}[locale];
+
+const serviceIcons = {
+  topography: Map,
+  agriculture: Sprout,
+  inspections: Camera,
+} as const;
+---
+
+<HomePageContentMobile locale={locale} />
+
+<div class="hidden md:block">
+<section class="relative flex min-h-[100svh] items-center overflow-hidden bg-foreground md:min-h-screen">
+  <div class="absolute inset-0">
+    <Image
+      src={heroImage}
+      alt={content.title}
+      format="webp"
+      widths={[480, 768, 1024, 1280, 1536]}
+      sizes="100vw"
+      quality={58}
+      loading="eager"
+      fetchpriority="high"
+      class="h-full w-full object-cover"
+    />
+    <div class="absolute inset-0 bg-foreground/70"></div>
+  </div>
+
+  <div class="container-narrow relative z-10 px-4 py-24 sm:py-28 md:px-8 md:pt-20 md:pb-12">
+    <div class="grid items-center gap-10 md:gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(300px,0.9fr)]">
+      <div class="max-w-2xl">
+        <h1 class="text-3xl font-extrabold leading-tight text-primary-foreground sm:text-4xl md:text-5xl lg:text-6xl">
+          {content.title}
+        </h1>
+        <p class="mt-5 max-w-2xl text-base text-primary-foreground/80 sm:text-lg md:mt-6 md:text-xl">{content.description}</p>
+
+        <div class="mt-8 flex flex-col gap-4 sm:flex-row">
+          <a href={content.primaryCta.href} class="btn btn-lg btn-primary w-full sm:w-auto">
+            {content.primaryCta.label}
+          </a>
+          <a
+            href={content.secondaryCta.href}
+            class="btn btn-lg w-full border border-primary-foreground/30 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 sm:w-auto"
+          >
+            {content.secondaryCta.label}
+          </a>
+        </div>
+      </div>
+
+      <div class="grid gap-4 rounded-3xl border border-primary-foreground/10 bg-primary-foreground/5 p-5 backdrop-blur-sm sm:p-6">
+        <div class="overflow-hidden rounded-2xl">
+          <Image
+            src={droneImage}
+            alt={content.eyebrow}
+            widths={[420, 680, 980]}
+            sizes="(min-width: 1024px) 40vw, 100vw"
+            quality={64}
+            class="h-48 w-full object-cover object-[78%_center] sm:h-56"
+          />
+        </div>
+        {
+          content.trustPoints.map((item) => (
+            <div class="rounded-2xl border border-primary-foreground/10 bg-foreground/10 p-4 text-sm leading-6 text-primary-foreground/80">
+              {item}
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    <div class="mt-12 max-w-5xl rounded-3xl border border-primary-foreground/10 bg-primary-foreground/6 p-4 backdrop-blur-sm sm:p-5 md:mt-20 md:p-6">
+      <p class="text-sm leading-7 text-primary-foreground md:text-base">{content.intro}</p>
+    </div>
+  </div>
+</section>
+
+<section id="services" class="section-padding topo-lines bg-background">
+  <div class="container-narrow">
+    <div class="max-w-5xl">
+      <span class="text-xs font-semibold uppercase tracking-[0.24em] text-muted-foreground sm:text-sm">{copy.searchIntent}</span>
+      <h2 class="mt-3 text-2xl font-bold text-foreground sm:text-3xl md:text-4xl">{content.servicesTitle}</h2>
+      <p class="mt-4 max-w-3xl text-muted-foreground">{content.servicesDescription}</p>
+    </div>
+
+    <div class="mt-8 grid gap-5 lg:mt-10 lg:grid-cols-3 lg:gap-6">
+      {
+        content.serviceCards.map((service) => {
+          const Icon = serviceIcons[service.routeKey];
+          const href = getLocalizedPath(locale, service.routeKey);
+
+          return (
+            <article class="card-hover flex h-full flex-col rounded-3xl border border-border bg-card p-5 shadow-sm sm:p-6">
+              <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10">
+                <Icon className="h-6 w-6 text-primary" />
+              </div>
+              <h3 class="mt-5 text-lg font-bold text-foreground sm:text-xl">{service.title}</h3>
+              <p class="mt-3 text-sm leading-6 text-muted-foreground">{service.description}</p>
+              <ul class="mt-5 space-y-2">
+                {service.bullets.map((item) => (
+                  <li class="flex items-start gap-3 text-sm text-foreground">
+                    <span class="mt-2 h-1.5 w-1.5 rounded-full bg-accent"></span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <a href={href} class="mt-6 text-sm font-semibold text-primary transition-colors hover:text-primary/80">
+                {service.title}
+              </a>
+            </article>
+          );
+        })
+      }
+    </div>
+  </div>
+</section>
+
+<section class="section-padding bg-card">
+  <div class="container-narrow grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+    <div>
+      <span class="text-xs font-semibold uppercase tracking-[0.24em] text-muted-foreground sm:text-sm">{copy.authority}</span>
+      <h2 class="mt-3 text-2xl font-bold text-foreground sm:text-3xl md:text-4xl">{content.whyTitle}</h2>
+      <div class="mt-6 space-y-4">
+        {content.whyItems.map((item) => (
+          <div class="rounded-3xl border border-border bg-background p-4 text-sm leading-6 text-foreground sm:p-5">
+            {item}
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div class="overflow-hidden rounded-3xl border border-border bg-background shadow-sm">
+      <Image
+        src={terrainModel}
+        alt={content.deliverablesTitle}
+        widths={[480, 760, 1080]}
+        sizes="(min-width: 1024px) 50vw, 100vw"
+        quality={62}
+        class="h-64 w-full object-cover md:h-full"
+      />
+    </div>
+  </div>
+</section>
+
+<section class="section-padding topo-lines bg-background">
+  <div class="container-narrow">
+    <div class="max-w-5xl">
+      <span class="text-xs font-semibold uppercase tracking-[0.24em] text-muted-foreground sm:text-sm">{copy.deliverables}</span>
+      <h2 class="mt-3 text-2xl font-bold text-foreground sm:text-3xl md:text-4xl">{content.deliverablesTitle}</h2>
+      <p class="mt-4 max-w-3xl text-muted-foreground">{content.deliverablesDescription}</p>
+    </div>
+
+    <div class="mt-8 space-y-4 md:hidden">
+      {
+        content.deliverablesRows.map((row) => (
+          <article class="rounded-3xl border border-border bg-card p-5 shadow-sm">
+            <p class="text-sm font-semibold text-foreground">{row.service}</p>
+            <div class="mt-4 space-y-4">
+              <div>
+                <p class="text-xs font-semibold uppercase tracking-[0.24em] text-muted-foreground">{copy.outputs}</p>
+                <p class="mt-2 text-sm leading-6 text-foreground">{row.deliverables}</p>
+              </div>
+              <div>
+                <p class="text-xs font-semibold uppercase tracking-[0.24em] text-muted-foreground">{copy.fit}</p>
+                <p class="mt-2 text-sm leading-6 text-foreground">{row.fit}</p>
+              </div>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+
+    <div class="mt-10 hidden overflow-hidden rounded-3xl border border-border bg-card shadow-sm md:block">
+      <div class="overflow-x-auto">
+        <table class="w-full min-w-[720px] text-left">
+          <thead class="bg-muted/60">
+            <tr>
+              <th class="px-6 py-4 text-sm font-semibold text-foreground">{copy.service}</th>
+              <th class="px-6 py-4 text-sm font-semibold text-foreground">{copy.outputs}</th>
+              <th class="px-6 py-4 text-sm font-semibold text-foreground">{copy.fit}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              content.deliverablesRows.map((row) => (
+                <tr class="border-t border-border">
+                  <td class="px-6 py-5 align-top text-sm font-semibold text-foreground">{row.service}</td>
+                  <td class="px-6 py-5 align-top text-sm leading-6 text-muted-foreground">{row.deliverables}</td>
+                  <td class="px-6 py-5 align-top text-sm leading-6 text-muted-foreground">{row.fit}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-padding bg-card">
+  <div class="container-narrow grid gap-12 lg:grid-cols-2">
+    <div>
+      <span class="text-xs font-semibold uppercase tracking-[0.24em] text-muted-foreground sm:text-sm">{copy.sectors}</span>
+      <h2 class="mt-3 text-2xl font-bold text-foreground sm:text-3xl md:text-4xl">{content.sectorsTitle}</h2>
+      <div class="mt-6 grid gap-4">
+        {content.sectors.map((item) => (
+          <div class="rounded-3xl border border-border bg-background p-4 text-sm leading-6 text-foreground sm:p-5">
+            {item}
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div>
+      <span class="text-xs font-semibold uppercase tracking-[0.24em] text-muted-foreground sm:text-sm">{copy.comparison}</span>
+      <h2 class="mt-3 text-2xl font-bold text-foreground sm:text-3xl md:text-4xl">{content.comparisonTitle}</h2>
+      <p class="mt-4 text-muted-foreground">{content.comparisonDescription}</p>
+
+      <div class="mt-6 overflow-hidden rounded-3xl border border-border bg-background">
+        {content.comparisonRows.map((row) => (
+          <div class="border-t border-border px-4 py-5 first:border-t-0 sm:px-6">
+            <p class="text-sm font-semibold uppercase tracking-widest text-primary">{row.focus}</p>
+            <div class="mt-3 grid gap-4 md:grid-cols-2">
+              <div class="rounded-2xl bg-card p-4">
+                <p class="text-xs font-semibold uppercase tracking-widest text-muted-foreground">{copy.drone}</p>
+                <p class="mt-2 text-sm leading-6 text-foreground">{row.drone}</p>
+              </div>
+              <div class="rounded-2xl bg-card p-4">
+                <p class="text-xs font-semibold uppercase tracking-widest text-muted-foreground">{copy.traditional}</p>
+                <p class="mt-2 text-sm leading-6 text-foreground">{row.traditional}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+</div>

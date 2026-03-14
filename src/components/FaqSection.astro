@@ -1,0 +1,49 @@
+---
+import { formatLongDate } from "@/lib/format";
+import type { FaqItem } from "@/data/content-types";
+import type { Locale } from "@/lib/routes";
+
+interface Props {
+  locale: Locale;
+  title: string;
+  items: FaqItem[];
+  label?: string;
+  note?: string;
+  updatedAt?: Date;
+}
+
+const {
+  locale,
+  title,
+  items,
+  label = "FAQ",
+  note,
+  updatedAt,
+} = Astro.props;
+---
+
+<section id="faq" class="section-padding bg-card">
+  <div class="container-narrow">
+    <div class="max-w-5xl">
+      <span class="text-xs font-semibold uppercase tracking-[0.24em] text-muted-foreground sm:text-sm">{label}</span>
+      <h2 class="mt-3 text-2xl font-bold text-foreground sm:text-3xl md:text-4xl">{title}</h2>
+      {note && (
+        <p class="mt-4 max-w-3xl text-muted-foreground">
+          {note}
+          {updatedAt ? ` ${formatLongDate(locale, updatedAt)}.` : ""}
+        </p>
+      )}
+    </div>
+
+    <div class="mt-10 grid gap-4 lg:grid-cols-2">
+      {items.map((item) => (
+        <details class="group h-full rounded-3xl border border-border bg-background p-5 shadow-sm sm:p-6">
+          <summary class="cursor-pointer list-none pr-8 text-base font-semibold text-foreground sm:pr-10 sm:text-lg">
+            {item.question}
+          </summary>
+          <p class="mt-4 text-sm leading-6 text-muted-foreground">{item.answer}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

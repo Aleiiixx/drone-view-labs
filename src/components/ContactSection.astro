@@ -32,7 +32,7 @@ import { Mail, MapPin, Phone } from "lucide-react";
       </div>
 
       <div class="grid items-start gap-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(320px,0.85fr)]">
-        <div class="flex rounded-lg border border-border bg-card p-8 shadow-md">
+        <div class="flex rounded-lg border border-border bg-card p-8 shadow-md lg:col-span-2">
           <div class="flex min-h-full w-full flex-col">
             <div>
               <label for="name" class="field-label" data-i18n="contact.form.nameLabel">Nom *</label>
@@ -79,7 +79,7 @@ import { Mail, MapPin, Phone } from "lucide-react";
               </div>
             </fieldset>
 
-            <div class="mt-0 max-h-0 overflow-hidden opacity-0 transition-all duration-300 ease-out lg:hidden" data-work-panel-shell data-layout="mobile" aria-hidden="true">
+            <div class="mt-0 max-h-0 overflow-hidden opacity-0 transition-all duration-300 ease-out" data-work-panel-shell data-layout="mobile" aria-hidden="true">
               <div class="pt-5">
                 <div class="rounded-lg border border-border bg-background p-6">
                   <div class="hidden space-y-5" data-work-panel="survey" data-layout="mobile">
@@ -189,132 +189,42 @@ import { Mail, MapPin, Phone } from "lucide-react";
           </div>
         </div>
 
-        <div class="flex flex-col">
-          <div class="mb-0 hidden max-h-0 overflow-hidden opacity-0 transition-all duration-300 ease-out lg:block" data-work-panel-shell data-layout="desktop" aria-hidden="true">
-            <aside class="rounded-lg border border-border bg-card p-8 shadow-md">
-              <div class="hidden space-y-5" data-work-panel="survey" data-layout="desktop">
-                <div class="space-y-2">
-                  <p class="text-sm font-semibold uppercase tracking-[0.22em] text-muted-foreground" data-i18n="contact.details.eyebrow">Dades inicials</p>
-                  <h3 class="text-2xl font-bold text-foreground" data-i18n="contact.details.survey.title">Informacio per al levantament topografic</h3>
-                  <p class="text-sm leading-6 text-muted-foreground" data-i18n="contact.details.survey.description">Amb aquestes dades podem fer-nos una idea rapida de l'entorn, l'escala del treball i el lliurament esperat.</p>
-                </div>
-                <div>
-                  <label for="survey-location-desktop" class="field-label" data-i18n="contact.details.survey.fields.location.label">Ubicacio o finca</label>
-                  <input id="survey-location-desktop" name="surveyLocation" class="input-field" maxlength="120" placeholder="Municipi, finca o referencia" data-i18n-placeholder="contact.details.survey.fields.location.placeholder" data-work-detail="survey" data-layout="desktop" />
-                </div>
-                <div class="grid gap-4 sm:grid-cols-2">
-                  <div>
-                    <label for="survey-area-desktop" class="field-label" data-i18n="contact.details.survey.fields.area.label">Superficie aproximada</label>
-                    <input id="survey-area-desktop" name="surveyArea" class="input-field" maxlength="60" placeholder="Ex. 12 ha" data-i18n-placeholder="contact.details.survey.fields.area.placeholder" data-work-detail="survey" data-layout="desktop" />
-                  </div>
-                  <div>
-                    <label for="survey-date-desktop" class="field-label" data-i18n="contact.details.survey.fields.date.label">Data orientativa</label>
-                    <input id="survey-date-desktop" name="surveyDate" type="date" class="input-field" data-work-detail="survey" data-layout="desktop" />
-                  </div>
-                </div>
-                <div>
-                  <label for="survey-delivery-desktop" class="field-label" data-i18n="contact.details.survey.fields.delivery.label">Que necessites rebre</label>
-                  <input id="survey-delivery-desktop" name="surveyDelivery" class="input-field" maxlength="80" placeholder="Ex. corbes de nivell o model digital" data-i18n-placeholder="contact.details.survey.fields.delivery.placeholder" data-work-detail="survey" data-layout="desktop" />
-                </div>
+        <div class="lg:col-span-2">
+          <dl class="grid gap-3 md:grid-cols-3">
+            <div class="flex items-center gap-3 rounded-lg border border-border bg-card px-4 py-4 shadow-sm">
+              <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-md bg-primary/10">
+                <Mail className="h-4 w-4 text-primary" />
               </div>
-
-              <div class="hidden space-y-5" data-work-panel="model3d" data-layout="desktop">
-                <div class="space-y-2">
-                  <p class="text-sm font-semibold uppercase tracking-[0.22em] text-muted-foreground" data-i18n="contact.details.eyebrow">Dades inicials</p>
-                  <h3 class="text-2xl font-bold text-foreground" data-i18n="contact.details.model3d.title">Informacio per al model 3D</h3>
-                  <p class="text-sm leading-6 text-muted-foreground" data-i18n="contact.details.model3d.description">Ens ajuda saber quin espai s'ha de modelar, per a que servira i quin nivell de detall t'interessa.</p>
-                </div>
-                <div>
-                  <label for="model-location-desktop" class="field-label" data-i18n="contact.details.model3d.fields.location.label">Ubicacio del projecte</label>
-                  <input id="model-location-desktop" name="modelLocation" class="input-field" maxlength="120" placeholder="Municipi, finca o actiu" data-i18n-placeholder="contact.details.model3d.fields.location.placeholder" data-work-detail="model3d" data-layout="desktop" />
-                </div>
-                <div class="grid gap-4 sm:grid-cols-2">
-                  <div>
-                    <label for="model-area-desktop" class="field-label" data-i18n="contact.details.model3d.fields.area.label">Superficie o dimensions</label>
-                    <input id="model-area-desktop" name="modelArea" class="input-field" maxlength="60" placeholder="Ex. 4 ha o 300 x 200 m" data-i18n-placeholder="contact.details.model3d.fields.area.placeholder" data-work-detail="model3d" data-layout="desktop" />
-                  </div>
-                  <div>
-                    <label for="model-date-desktop" class="field-label" data-i18n="contact.details.model3d.fields.date.label">Data orientativa</label>
-                    <input id="model-date-desktop" name="modelDate" type="date" class="input-field" data-work-detail="model3d" data-layout="desktop" />
-                  </div>
-                </div>
-                <div class="grid gap-4 sm:grid-cols-2">
-                  <div>
-                    <label for="model-goal-desktop" class="field-label" data-i18n="contact.details.model3d.fields.goal.label">Objectiu del model</label>
-                    <input id="model-goal-desktop" name="modelGoal" class="input-field" maxlength="80" placeholder="Ex. analisi tecnica o presentacio" data-i18n-placeholder="contact.details.model3d.fields.goal.placeholder" data-work-detail="model3d" data-layout="desktop" />
-                  </div>
-                  <div>
-                    <label for="model-detail-desktop" class="field-label" data-i18n="contact.details.model3d.fields.detail.label">Nivell de detall esperat</label>
-                    <input id="model-detail-desktop" name="modelDetail" class="input-field" maxlength="80" placeholder="Ex. visual general o detall alt" data-i18n-placeholder="contact.details.model3d.fields.detail.placeholder" data-work-detail="model3d" data-layout="desktop" />
-                  </div>
-                </div>
-              </div>
-
-              <div class="hidden space-y-5" data-work-panel="agriculture" data-layout="desktop">
-                <div class="space-y-2">
-                  <p class="text-sm font-semibold uppercase tracking-[0.22em] text-muted-foreground" data-i18n="contact.details.eyebrow">Dades inicials</p>
-                  <h3 class="text-2xl font-bold text-foreground" data-i18n="contact.details.agriculture.title">Informacio per a l'aplicacio agricola</h3>
-                  <p class="text-sm leading-6 text-muted-foreground" data-i18n="contact.details.agriculture.description">Amb quatre dades del tractament podem valorar millor la viabilitat i preparar una primera estimacio.</p>
-                </div>
-                <div>
-                  <label for="agri-location-desktop" class="field-label" data-i18n="contact.details.agriculture.fields.location.label">Ubicacio o finca</label>
-                  <input id="agri-location-desktop" name="agriLocation" class="input-field" maxlength="120" placeholder="Municipi, finca o parcel·la" data-i18n-placeholder="contact.details.agriculture.fields.location.placeholder" data-work-detail="agriculture" data-layout="desktop" />
-                </div>
-                <div class="grid gap-4 sm:grid-cols-2">
-                  <div>
-                    <label for="agri-product-desktop" class="field-label" data-i18n="contact.details.agriculture.fields.product.label">Producte a aplicar</label>
-                    <input id="agri-product-desktop" name="agriProduct" class="input-field" maxlength="80" placeholder="Ex. fitosanitari o bioestimulant" data-i18n-placeholder="contact.details.agriculture.fields.product.placeholder" data-work-detail="agriculture" data-layout="desktop" />
-                  </div>
-                  <div>
-                    <label for="agri-date-desktop" class="field-label" data-i18n="contact.details.agriculture.fields.date.label">Data orientativa</label>
-                    <input id="agri-date-desktop" name="agriDate" type="date" class="input-field" data-work-detail="agriculture" data-layout="desktop" />
-                  </div>
-                </div>
-                <div class="grid gap-4 sm:grid-cols-2">
-                  <div>
-                    <label for="agri-quantity-desktop" class="field-label" data-i18n="contact.details.agriculture.fields.quantity.label">Quantitat prevista</label>
-                    <input id="agri-quantity-desktop" name="agriQuantity" class="input-field" maxlength="60" placeholder="Ex. 80 L o 25 kg" data-i18n-placeholder="contact.details.agriculture.fields.quantity.placeholder" data-work-detail="agriculture" data-layout="desktop" />
-                  </div>
-                  <div>
-                    <label for="agri-hectares-desktop" class="field-label" data-i18n="contact.details.agriculture.fields.hectares.label">Hectarees aproximades</label>
-                    <input id="agri-hectares-desktop" name="agriHectares" class="input-field" maxlength="60" placeholder="Ex. 6 ha" data-i18n-placeholder="contact.details.agriculture.fields.hectares.placeholder" data-work-detail="agriculture" data-layout="desktop" />
-                  </div>
-                </div>
-                <div>
-                  <label for="agri-crop-desktop" class="field-label" data-i18n="contact.details.agriculture.fields.crop.label">Cultiu</label>
-                  <input id="agri-crop-desktop" name="agriCrop" class="input-field" maxlength="80" placeholder="Ex. olivera, vinya o fruiters" data-i18n-placeholder="contact.details.agriculture.fields.crop.placeholder" data-work-detail="agriculture" data-layout="desktop" />
-                </div>
-              </div>
-            </aside>
-          </div>
-
-          <div class="rounded-lg border border-border bg-card p-8 shadow-md">
-            <div class="flex flex-col gap-8">
-              <div class="flex items-start gap-4">
-                <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg bg-primary/10"><Mail className="h-5 w-5 text-primary" /></div>
-                <div>
-                  <h3 class="font-semibold text-foreground" data-i18n="contact.info.emailLabel">Correu electronic</h3>
-                  <p class="text-sm text-muted-foreground" data-i18n="contact.info.emailValue">info@servidrone.cat</p>
-                </div>
-              </div>
-
-              <div class="flex items-start gap-4">
-                <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg bg-primary/10"><Phone className="h-5 w-5 text-primary" /></div>
-                <div>
-                  <h3 class="font-semibold text-foreground" data-i18n="contact.info.phoneLabel">Telefon</h3>
-                  <p class="text-sm text-muted-foreground" data-i18n="contact.info.phoneValue">+34 622 00 13 26</p>
-                </div>
-              </div>
-
-              <div class="flex items-start gap-4">
-                <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg bg-primary/10"><MapPin className="h-5 w-5 text-primary" /></div>
-                <div>
-                  <h3 class="font-semibold text-foreground" data-i18n="contact.info.areaLabel">Ubicacio i ambit</h3>
-                  <p class="text-sm text-muted-foreground" data-i18n="contact.info.areaValue">Tarragona i servei a tot Catalunya</p>
-                </div>
+              <div class="min-w-0 flex-1">
+                <dt class="sr-only" data-i18n="contact.info.emailLabel">Correu electronic</dt>
+                <dd class="text-sm font-semibold leading-5 text-foreground">
+                  <a href="mailto:info@servidrone.cat" class="break-all transition-colors duration-200 hover:text-primary md:break-normal" data-i18n="contact.info.emailValue">info@servidrone.cat</a>
+                </dd>
               </div>
             </div>
-          </div>
+
+            <div class="flex items-center gap-3 rounded-lg border border-border bg-card px-4 py-4 shadow-sm">
+              <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-md bg-primary/10">
+                <Phone className="h-4 w-4 text-primary" />
+              </div>
+              <div class="min-w-0 flex-1">
+                <dt class="sr-only" data-i18n="contact.info.phoneLabel">Telefon</dt>
+                <dd class="text-sm font-semibold leading-5 text-foreground">
+                  <a href="tel:+34622001326" class="transition-colors duration-200 hover:text-primary" data-i18n="contact.info.phoneValue">+34 622 00 13 26</a>
+                </dd>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-3 rounded-lg border border-border bg-card px-4 py-4 shadow-sm">
+              <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-md bg-primary/10">
+                <MapPin className="h-4 w-4 text-primary" />
+              </div>
+              <div class="min-w-0 flex-1">
+                <dt class="sr-only" data-i18n="contact.info.areaLabel">Ubicacio i ambit</dt>
+                <dd class="text-sm font-semibold leading-5 text-foreground" data-i18n="contact.info.areaValue">Tarragona i servei a tot Catalunya</dd>
+              </div>
+            </div>
+          </dl>
         </div>
       </div>
     </form>
@@ -333,8 +243,6 @@ import { Mail, MapPin, Phone } from "lucide-react";
   const errorAlert = form?.querySelector("[data-form-error]");
   const phoneInput = form?.querySelector("#phone");
   const submitButton = form?.querySelector('button[type="submit"]');
-
-  const getActiveLayout = () => (window.matchMedia("(min-width: 1024px)").matches ? "desktop" : "mobile");
 
   const isValidPhoneNumber = (value: string) => {
     const trimmed = value.trim();
@@ -394,25 +302,19 @@ import { Mail, MapPin, Phone } from "lucide-react";
     const selected = form.querySelector("[data-work-type-input]:checked");
     const selectedValue = selected instanceof HTMLInputElement ? selected.value : "";
     const hasSelection = Boolean(selectedValue);
-    const activeLayout = getActiveLayout();
 
     panels.forEach((panel) => {
       if (!(panel instanceof HTMLElement)) return;
-      const isVisible = panel.dataset.workPanel === selectedValue && panel.dataset.layout === activeLayout;
+      const isVisible = panel.dataset.workPanel === selectedValue;
       panel.classList.toggle("hidden", !isVisible);
     });
 
     panelShells.forEach((shell) => {
       if (!(shell instanceof HTMLElement)) return;
-      const isActiveShell = hasSelection && shell.dataset.layout === activeLayout;
+      const isActiveShell = hasSelection;
 
-      if (shell.dataset.layout === "mobile") {
-        shell.classList.toggle("mt-0", !isActiveShell);
-        shell.classList.toggle("mt-5", isActiveShell);
-      } else {
-        shell.classList.toggle("mb-0", !isActiveShell);
-        shell.classList.toggle("mb-6", isActiveShell);
-      }
+      shell.classList.toggle("mt-0", !isActiveShell);
+      shell.classList.toggle("mt-5", isActiveShell);
 
       shell.classList.toggle("max-h-0", !isActiveShell);
       shell.classList.toggle("opacity-0", !isActiveShell);
@@ -426,7 +328,7 @@ import { Mail, MapPin, Phone } from "lucide-react";
         return;
       }
 
-      const isActive = field.dataset.workDetail === selectedValue && field.dataset.layout === activeLayout;
+      const isActive = field.dataset.workDetail === selectedValue;
       field.disabled = !isActive;
       field.required = isActive;
     });
@@ -445,14 +347,12 @@ import { Mail, MapPin, Phone } from "lucide-react";
     phoneInput.addEventListener("input", () => phoneInput.setCustomValidity(""));
   }
 
-  window.addEventListener("resize", updateWorkPanel, { passive: true });
   updateWorkPanel();
 
   form?.addEventListener("submit", async (event) => {
     event.preventDefault();
     if (!(form instanceof HTMLFormElement) || !(status instanceof HTMLElement)) return;
 
-    const activeLayout = getActiveLayout();
     const selected = form.querySelector("[data-work-type-input]:checked");
     const selectedValue = selected instanceof HTMLInputElement ? selected.value : "";
 
@@ -473,7 +373,7 @@ import { Mail, MapPin, Phone } from "lucide-react";
         return false;
       }
 
-      return field.dataset.workDetail === selectedValue && field.dataset.layout === activeLayout && !field.value.trim();
+      return field.dataset.workDetail === selectedValue && !field.value.trim();
     });
 
     if (
